@@ -2,17 +2,23 @@ from typing import List
 
 from bibtexparser import load
 from bibtexparser import dumps
+from bibtexparser.bparser import BibTexParser
 from bibtexparser.bibdatabase import BibDatabase
 
 from notion_scholar.publication import Publication
 
 
-def get_bib_database(path: str) -> BibDatabase:
-    with open(path) as bibtex_file:
+def get_bib_database_from_file(file_path: str) -> BibDatabase:
+    with open(file_path) as bibtex_file:
         return load(bibtex_file)
 
 
-def get_publications(bib_database: BibDatabase) -> List[Publication]:
+def get_bib_database_from_string(string: str) -> BibDatabase:
+    bibtex_parser = BibTexParser(interpolate_strings=False)
+    return bibtex_parser.parse(string)
+
+
+def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
     publications = []
     for entry in bib_database.entries:
         db = BibDatabase()
