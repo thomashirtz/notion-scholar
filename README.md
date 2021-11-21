@@ -77,6 +77,7 @@ optional arguments:
 ```
 
 </details>
+
 ____
 
 Four main mode exists: `run`, `set`, ` inspect-config` and `clear-config`. The help can be called this way:
