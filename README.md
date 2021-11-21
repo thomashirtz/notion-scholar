@@ -103,7 +103,7 @@ optional arguments:
                         config and no bib-string is passed. (default: <bib-file-path>)
   -s , --bib-string     Bibtex entries to add (must be in-between three quotes """<bib-string>"""). By default, the
                         entries will be saved to the bib file from the config. It is possible to disable this behavior
-                        by changing the "save" option: "ns setup -save false".
+                        by changing the "save" option: "ns set -save false".
 ```
 
 </details>
@@ -136,11 +136,11 @@ optional arguments:
 ### Token and database URL
 For the first use it is recommended to set up the configuration file. The main parameters to save is the token (which will be securely saved using the ["keyring"](https://pypi.org/project/keyring/) library) and the database-url.
 ```
-ns setup --token <token> --database-url <database_url>
+ns set --token <token> --database-url <database_url>
 ```
 or
 ```
-ns setup -t <token> -db <database_url>
+ns set -t <token> -db <database_url>
 ```
 Note: The notion token can be found by:   
 Launching a browser ⇨ Connect to [notion.so](https://www.notion.so/) ⇨ Inspect (F12) ⇨ Cookies ⇨ token_v2
@@ -149,11 +149,11 @@ Launching a browser ⇨ Connect to [notion.so](https://www.notion.so/) ⇨ Inspe
 ### Bib file path
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
-ns setup --bib-file-path <bib_file_path>
+ns set --bib-file-path <bib_file_path>
 ```
 or
 ```
-ns setup -f <bib_file_path>
+ns set -f <bib_file_path>
 ```
 
 ### Inspecting & clearing the configuration
