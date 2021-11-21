@@ -23,16 +23,14 @@ The properties necessary to import publications in the database are the followin
 
 The properties can have any capitalization.
 
-## Dashboard 
+## Template 
 
+<details><summary>Images from the dashboard template</summary>
+  
 ### Preview
 ![inbox](images/notion-scholar-1-inbox.png)
 ![fields](images/notion-scholar-2-fields.png)
 ![by-status](images/notion-scholar-3-by-status.png)
-
-<details><summary>More images from the dashboard</summary>
-  
-### More database views
 ![by-field](images/notion-scholar-4-by-field.png)  
 ![by-filename](images/notion-scholar-5-by-filename.png)  
 ### Field page  
@@ -52,22 +50,20 @@ You can now call the application using `notion-scholar` or `ns`
 
 ## Help
 
+For getting help it is possible to call:
 ```
 ns --help
 ```
 
+Four main command exists: `run`, `set`, ` inspect-config` and `clear-config`. The help can be called this way:
 ```
 ns run --help
-```
-
-```
-ns setup --help
 ```
 
 ## Setting up 
 
 ### Token and database URL
-For the first use it is recommended to set up the configuration file. The main parameters to save is the token (which will be securely saved using "keyring") and the database-url.
+For the first use it is recommended to set up the configuration file. The main parameters to save is the token (which will be securely saved using the ["keyring"](https://pypi.org/project/keyring/) library) and the database-url.
 ```
 ns setup --token <token> --database-url <database_url>
 ```
@@ -75,21 +71,68 @@ or
 ```
 ns setup -t <token> -db <database_url>
 ```
-Note: The notion token can be found by: Going in a browser ⇨ Connect to notion.so ⇨ Inspect (F12) ⇨ Cookies ⇨ token_v2
+Note: The notion token can be found by:   
+Launching a browser ⇨ Connect to [notion.so](https://www.notion.so/) ⇨ Inspect (F12) ⇨ Cookies ⇨ token_v2
+
 
 ### Input and output file paths
-If you want to use an input file (file where you dump the bibtex entries) and an output file (file used as the main bibtex file), you can set the default paths by typing:
+If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
-ns setup --input-file-path <input_file_path> --output-file-path <output_file_path>
+ns setup --bib-file-path <bib_file_path>
 ```
 or
 ```
-ns setup -i <input_file_path> -o <output_file_path>
+ns setup -f <bib_file_path>
 ```
 
-### Inspecting the configuration
+### Inspecting & clearing the configuration
 
 It is possible to see all the configuration saved by typing:
 ```
-ns inspect
+ns inspect-config
 ```
+Moreover, it is possible to erase all the config saved (token, database_url, ...) by running:
+```
+ns clear-config
+```
+
+## Usage & tips
+
+### Bibtex keys
+
+When uploading a bibtex file into the database, the bibtex citekey will be mapped to the property "filename". This is because it seems convinient to have the same name for the key and for the filename. It is therefore advised to change the citekey before uploading to Notion.
+
+This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
+
+<details><summary>Nomenclature</summary>
+
+`aaaayyyyxxxx.pdf`
+
+**Where:**  
+- `aaaa`: Name of the first author (variable length)
+- `yyyy`: Year of publication (fixed length)
+- `xxxx`: First word of title, minus articles and other small words (variable length)
+
+**For example:**  
+Attention Is All You Need, Ashish Vaswani et al., 2017
+
+**Would give:**  
+`vaswani2017attention.pdf`
+
+If two paper publish the same year, with the same beginning of the word, I add a `1` and `2` depending on which one was first release.
+
+For example:  
+- Soft Actor-Critic Algorithms and Applications, Tuomas Haarnoja et al., 2018
+  `haarnoja2018soft1.pdf`
+- Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor, Tuomas Haarnoja et al., 2018
+  `haarnoja2018soft2.pdf`
+
+</details>
+    
+### Copy equation properties
+
+It is possible to copy equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
+
+## Feedbacks
+
+If you want to see a new feature, or you have some feedbacks to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
