@@ -75,7 +75,7 @@ Note: The notion token can be found by:
 Launching a browser ⇨ Connect to [notion.so](https://www.notion.so/) ⇨ Inspect (F12) ⇨ Cookies ⇨ token_v2
 
 
-### Input and output file paths
+### Bib file path
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
 ns setup --bib-file-path <bib_file_path>
@@ -97,6 +97,14 @@ ns clear-config
 ```
 
 ## Usage & tips
+
+### How to use ?
+
+There is three main way to use this application:
+
+1. [Setting up](###-Bib-file-path) the `bib-file-path` and calling `ns run` (It will automatically upload the new publications from the bib file into the database)
+2. Giving the `bib-file-path` as argument: `ns run -f <bib-file-path>`
+3. Giving a bib string as argument: `ns run -s """"<bib-string>"""` !be careful to type three quotes `"""` before pasting the `bib-string`
 
 ### Bibtex keys
 
