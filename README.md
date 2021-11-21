@@ -102,7 +102,7 @@ ns clear-config
 
 There is three main way to use this application:
 
-1. [Setting up](###-Bib-file-path) the `bib-file-path` and calling `ns run` (It will automatically upload the new publications from the bib file into the database)
+1. [Setting up](#bib-file-path) the `bib-file-path` and calling `ns run` (It will automatically upload the new publications from the bib file into the database)
 2. Giving the `bib-file-path` as argument: `ns run -f <bib-file-path>`
 3. Giving a bib string as argument: `ns run -s """"<bib-string>"""` !be careful to type three quotes `"""` before pasting the `bib-string`
 
