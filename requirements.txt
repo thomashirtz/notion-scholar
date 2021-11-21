@@ -1,0 +1,5 @@
+keyring
+setuptools
+bibtexparser
+platformdirs
+-e git://github.com/wsykala/notion-py@refs/pull/352/merge#egg=notion
