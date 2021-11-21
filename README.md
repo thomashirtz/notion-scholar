@@ -2,6 +2,8 @@
 
 Reference management solution using Python and Notion. 
 
+The main idea of this app is to allow to furnish a Notion database using a bibtex formated string or file. It also help you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
+
 ## Database 
 
 ### Preview
