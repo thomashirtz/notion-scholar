@@ -10,24 +10,25 @@ The main idea of this app is to allow to furnish a Notion database using a bibte
 
 ![publication-database](images/notion-scholar-0-database.png)
 
-Each publication possess its own page, it is therefore possible to add some notes links and else to every papers.
+__Example of a database obtained using notion-scholar.__
+
 ### Requirements
 
 The properties necessary to import publications in the database are the following:
-* abstract (Text)
-* year (Number)
-* bibtex (Text)
-* filename (Text)
-* journal (Text)
-* authors (Text)
-* url (URL)
-* inbox (Checkbox)  
+* abstract __(Text)__
+* year __(Number)__
+* bibtex __(Text)__
+* filename __(Text)__
+* journal __(Text)__
+* authors __(Text)__
+* url __(URL)__
+* inbox __(Checkbox)__  
 
 The properties can have any capitalization.
 
 ## Template 
 
-<details><summary>Images from the dashboard template</summary>
+<details><summary>Dashboard template images</summary>
   
 ### Preview
 ![inbox](images/notion-scholar-1-inbox.png)
@@ -195,7 +196,8 @@ When uploading a bibtex file into the database, the bibtex citekey will be mappe
 This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
 
 <details><summary>Nomenclature</summary>
-
+  
+  
 `aaaayyyyxxxx.pdf`
 
 **Where:**  
