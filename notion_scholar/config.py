@@ -75,7 +75,6 @@ def setup(
 
     section_option_list = []
     if bib_file_path is not None:
-        print(Path(bib_file_path).is_file())
         if Path(bib_file_path).is_file():
             section_option_list.append(('paths', 'bib_file_path', bib_file_path))
         else:
@@ -84,7 +83,6 @@ def setup(
         section_option_list.append(('notion_api', 'database_url', database_url))
     if save is not None:
         section_option_list.append(('preferences', 'save_to_bib_file', str(save)))
-    print(section_option_list)
     add_to_config(section_option_list)
 
 
