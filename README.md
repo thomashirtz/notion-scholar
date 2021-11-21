@@ -6,8 +6,6 @@ The main idea of this app is to allow to furnish a Notion database using a bibte
 
 ## Database 
 
-### Preview
-
 ![publication-database](images/notion-scholar-0-database.png)
 
 _Example of a database obtained using notion-scholar._
