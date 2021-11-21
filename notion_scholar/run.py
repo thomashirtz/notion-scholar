@@ -2,6 +2,7 @@ from typing import List
 from typing import Optional
 
 from bibtexparser.bibdatabase import BibDatabase
+from bibtexparser import dumps
 
 from notion_scholar.bibtex import get_publication_list
 from notion_scholar.bibtex import get_bib_database_from_file
@@ -14,6 +15,10 @@ from notion_scholar.notion_api import get_publication_key_list_from_database
 
 from notion_scholar.publication import Publication
 from notion_scholar.publication import filter_publication_list
+
+from notion_scholar.bibtex import get_key_list
+from collections import Counter
+from notion_scholar.utilities import append_string_to_file
 
 
 class IllegalArgumentError(NotionScholarError):
@@ -50,6 +55,22 @@ def run(
     )
 
     if not publication_list_filtered and publication_list:
-        print('All the publications are already present in the database.')
+        print('\nAll the publications are already present in the database.')
 
-    # todo add bib_string to file
+    if bib_string is not None and save_to_bib_file:
+        key_list = get_key_list(bib_file_path)
+        duplicates = [k for k, v in Counter(key_list).items() if v > 1]
+        if duplicates:
+            print(f"\nWarning! There is duplicates in the file: {duplicates}")
+
+        entries = []
+        print(f'\nSaving the entries to {bib_file_path}')
+        for i, entry in enumerate(bib_database.entries):
+            if entry["ID"] not in key_list:
+                entries.append(entry)
+            else:
+                print(f'"{entry["ID"]}" is already present in the file.')
+
+        bib_database.entries = entries
+        string = dumps(bib_database)  # todo need to add this into the bibtex module
+        append_string_to_file(string=string, file_path=bib_file_path)
