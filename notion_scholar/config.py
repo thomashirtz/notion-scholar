@@ -1,7 +1,11 @@
+import shutil
 import keyring  # https://askubuntu.com/a/881212 Solve issues of keyring with WSL
-from pathlib import Path
+from typing import Any
+from typing import Dict
+from typing import List
 from typing import Tuple
 from typing import Optional
+from pathlib import Path
 from configparser import ConfigParser
 from platformdirs import user_config_dir
 
@@ -12,7 +16,11 @@ class ConfigError(NotionScholarError):
     """A config exception class for notion-scholar."""
 
 
-def add_to_config(section: str, option: str, value: str) -> None:
+def get_token() -> Optional[str]:
+    return keyring.get_password("notion-scholar", "token")
+
+
+def add_to_config(section_option_value_list: List[Tuple[str, str, Any]]) -> None:
     directory_path = Path(user_config_dir(appname="notion-scholar"))
     config_path = directory_path.joinpath('config').with_suffix('.ini')
 
@@ -21,59 +29,63 @@ def add_to_config(section: str, option: str, value: str) -> None:
 
     # Create config file if not exist
     if not config_path.is_file():
-        with open(config_path, 'w') as f:
+        with open(config_path, 'w'):
             pass
 
     # Get the config file content
     config = ConfigParser()
     config.read(config_path)
-    if not config.has_section(section):
-        config.add_section(section)
 
-    # Edit the value
-    config.set(section, option, value)
+    # Edit the value & add section if doesn't exist
+    for section, option, value in section_option_value_list:
+        if not config.has_section(section):
+            config.add_section(section)
+        config.set(section, option, value)
 
     # Save the changes
     with open(config_path, 'w') as configfile:
         config.write(configfile)
 
 
-def get_token() -> Optional[str]:
-    return keyring.get_password("notion-scholar", "token")
-
-
-def get_config() -> Tuple[Optional[str], Optional[str], Optional[str]]:
+def get_config() -> Dict[str, Any]:
     directory_path = Path(user_config_dir(appname="notion-scholar"))
     config_path = directory_path.joinpath('config').with_suffix('.ini')
 
     if not config_path.is_file():
-        database_url = None
-        input_file_path = None
-        output_file_path = None
+        return {}
 
     else:
         config = ConfigParser()
         config.read(config_path)
-        database_url = config.get('notion', 'database_url', fallback=None)
-        input_file_path = config.get('paths', 'input_file_path', fallback=None)
-        output_file_path = config.get('paths', 'output_file_path', fallback=None)
-    return database_url, input_file_path, output_file_path
+
+        dct = {}
+        for section in config.sections():
+            dct.update(dict(config[section]))
+        return dct
 
 
 def setup(
-        token: Optional[str] = None,
-        database_url: Optional[str] = None,
-        input_file_path: Optional[str] = None,
-        output_file_path: Optional[str] = None,
+        token: Optional[str],
+        database_url: Optional[str],
+        bib_file_path: Optional[str],
+        save: Optional[bool],
 ) -> None:
     if token is not None:
-        keyring.set_password("notion-scholar", "token", str(token))  # keyring.get_password("notion-scholar", "token")
-    if input_file_path is not None and Path(input_file_path).is_file():
-        add_to_config('paths', 'input_file_path', str(input_file_path))
-    if output_file_path is not None and Path(output_file_path).is_file():
-        add_to_config('paths', 'output_file_path', str(output_file_path))
+        keyring.set_password("notion-scholar", "token", token)  # keyring.get_password("notion-scholar", "token")
+
+    section_option_list = []
+    if bib_file_path is not None:
+        print(Path(bib_file_path).is_file())
+        if Path(bib_file_path).is_file():
+            section_option_list.append(('paths', 'bib_file_path', bib_file_path))
+        else:
+            print(f'The file "{bib_file_path}" does not exist, it will not be added to the config file.')
     if database_url is not None:
-        add_to_config('notion', 'database_url', str(database_url))
+        section_option_list.append(('notion_api', 'database_url', database_url))
+    if save is not None:
+        section_option_list.append(('preferences', 'save_to_bib_file', str(save)))
+    print(section_option_list)
+    add_to_config(section_option_list)
 
 
 def inspect() -> None:
@@ -81,11 +93,18 @@ def inspect() -> None:
     config_path = directory_path.joinpath('config').with_suffix('.ini')
     token = get_token()
 
-    database_url, input_file_path, output_file_path = get_config()
-    is_token_saved = not (token is None)
+    print(f'\nconfig_file_path: {str(config_path)}')
+    print(f'config_file_exist: {config_path.exists()}')
+    print(f'token: {token}')
 
-    print(f'\nPath of the config file: {str(config_path)}')
-    print(f'database_url: {database_url}')
-    print(f'input_file_path: {input_file_path}')
-    print(f'output_file_path: {output_file_path}')
-    print(f'is_token_saved: {is_token_saved}\n')
+    config = get_config()
+    for key, value in config.items():
+        if key in ['database_url', 'save_to_bib_file', 'bib_file_path']:
+            print(f'{key}: {value}')
+    print()
+
+
+def clear() -> None:
+    directory_path = Path(user_config_dir(appname="notion-scholar"))
+    shutil.rmtree(directory_path, ignore_errors=True)
+    keyring.delete_password("notion-scholar", "token")

@@ -1,6 +1,6 @@
 from typing import List
-
 from notion.client import NotionClient
+
 from notion_scholar.publication import Publication
 
 
@@ -11,8 +11,8 @@ def add_publications_to_database(
 ) -> None:
     client = NotionClient(token_v2=token)
     cv = client.get_collection_view(database_url)
-    for publication in publications:
-        print(publication.key, publication)
+    for i, publication in enumerate(publications, start=1):
+        print(f'{i}/{len(publications)}: {publication}')
         row = cv.collection.add_row()
         row.name = publication.title
         row.abstract = publication.abstract
@@ -23,3 +23,12 @@ def add_publications_to_database(
         row.authors = publication.author
         row.url = publication.url
         row.inbox = True
+
+
+def get_publication_key_list_from_database(
+        token: str,
+        database_url: str,
+) -> List[str]:
+    client = NotionClient(token_v2=token)
+    cv = client.get_collection_view(database_url)
+    return [row.filename for row in cv.collection.get_rows()]

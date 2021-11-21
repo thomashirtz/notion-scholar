@@ -35,3 +35,8 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
             bibtex=bibtex_str,
         ))
     return publications
+
+
+def get_key_list(bib_file_path):
+    bib_database = get_bib_database_from_file(bib_file_path)
+    return [entry['ID'] for entry in bib_database.entries]
