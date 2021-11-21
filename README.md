@@ -10,19 +10,19 @@ The main idea of this app is to allow to furnish a Notion database using a bibte
 
 ![publication-database](images/notion-scholar-0-database.png)
 
-__Example of a database obtained using notion-scholar.__
+_Example of a database obtained using notion-scholar._
 
 ### Requirements
 
 The properties necessary to import publications in the database are the following:
-* abstract __(Text)__
-* year __(Number)__
-* bibtex __(Text)__
-* filename __(Text)__
-* journal __(Text)__
-* authors __(Text)__
-* url __(URL)__
-* inbox __(Checkbox)__  
+* abstract _(Text)_
+* year _(Number)_
+* bibtex _(Text)_
+* filename _(Text)_
+* journal _(Text)_
+* authors _(Text)_
+* url _(URL)_
+* inbox _(Checkbox)_  
 
 The properties can have any capitalization.
 
