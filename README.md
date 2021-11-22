@@ -184,7 +184,8 @@ ns run -f <bib-file-path>
 ```
 ns run -s """"<bib-string>"""
 ```
-
+*The `token` and the `database_url` are also required, however if their are `set`, they don't need to be added again to the argument list.*
+  
 ## Tips
 ### Bibtex keys
 
