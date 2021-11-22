@@ -175,16 +175,16 @@ There is three main way to use this application:
 ```
 ns run
 ```
-2. Giving the `bib-file-path` as argument: 
+2. Giving the `bib-file-path` argument: 
 ```
 ns run -f <bib-file-path>
 ```
-3. Giving a bib string as argument (/!\ be careful to type three quotes `"""` before pasting the `bib-string`) : 
+3. Giving a `bib-string` argument (/!\ be careful to type three quotes `"""` before pasting the `bib-string`) : 
 
 ```
 ns run -s """"<bib-string>"""
 ```
-*The `token` and the `database_url` are also required, however if their are `set`, they don't need to be added again to the argument list.*
+**The `--token` (`-t`) and the `database_url` (`-db`) are also required, however if they have been `set`, they don't need to be added again to the argument list.**
   
 ## Tips
 ### Bibtex keys
