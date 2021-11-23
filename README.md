@@ -2,7 +2,7 @@
 
 Reference management solution using Python and Notion. 
 
-The main idea of this app is to allow to furnish a Notion database using a bibtex formated string or file. It also help you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
+The main idea of this app is to allow to furnish a Notion database using a BibTex formatted string or file. It also helps you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
 
 ## Database 
 
@@ -134,7 +134,7 @@ optional arguments:
 ## Setting up 
 
 ### Token and database URL
-For the first use it is recommended to set up the configuration file. The main parameters to save is the token (which will be securely saved using the ["keyring"](https://pypi.org/project/keyring/) library) and the database-url.
+For the first use, it is recommended to set up the configuration file. The main parameters to save are the token (which will be securely saved using the ["keyring"](https://pypi.org/project/keyring/) library) and the database-url.
 ```
 ns set --token <token> --database-url <database_url>
 ```
@@ -158,7 +158,7 @@ ns set -f <bib_file_path>
 
 ### Inspecting & clearing the configuration
 
-It is possible to see all the configuration saved by typing:
+It is possible to see all the configurations saved by typing:
 ```
 ns inspect-config
 ```
@@ -184,12 +184,12 @@ ns run -f <bib-file-path>
 ```
 ns run -s """"<bib-string>"""
 ```
-**The `--token` (`-t`) and the `database_url` (`-db`) are also required, however if they have been `set`, they don't need to be added again to the argument list.**
+**The `--token` (`-t`) and the `database_url` (`-db`) are also required, however, if they have been `set`, they don't need to be added again to the argument list.**
   
 ## Tips
 ### Bibtex keys
 
-When uploading a bibtex file into the database, the bibtex citekey will be mapped to the property "filename". This is because it seems convinient to have the same name for the key and for the filename. It is therefore advised to change the citekey before uploading to Notion.
+When uploading a BibTex file into the database, the BibTex citekey will be mapped to the property "filename". This is because it seems convenient to have the same name for the key and the filename. It is therefore advised to change the citekey before uploading to Notion.
 
 This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
 
@@ -209,7 +209,7 @@ Attention Is All You Need, Ashish Vaswani et al., 2017
 **Would give:**  
 `vaswani2017attention.pdf`
 
-If two paper publish the same year, with the same beginning of the word, I add a `1` and `2` depending on which one was first release.
+If an author publish two papers the same year with the same beginning first word, it is possible to add an `1` and `2` depending on which one was the first released.
 
 For example:  
 - Soft Actor-Critic Algorithms and Applications, Tuomas Haarnoja et al., 2018
@@ -221,13 +221,13 @@ For example:
     
 ### Copy equation properties
 
-It is possible to copy equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
+It is possible to copy the equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
 
 ## Feedbacks
 
-If you want to see a new feature, or you have some feedbacks to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
+If you want to see a new feature, or you have some feedback to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
 
-# License
+## License
 
      Copyright 2021 Thomas Hirtz
 
