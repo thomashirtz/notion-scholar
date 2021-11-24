@@ -194,8 +194,8 @@ When uploading a BibTex file into the database, the BibTex citekey will be mappe
 This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
 
 <details><summary>Nomenclature</summary>
-  
-  
+
+**Filename:**
 `aaaayyyyxxxx.pdf`
 
 **Where:**  
@@ -223,6 +223,13 @@ For example:
 
 It is possible to copy the equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
 
+## To-do
+  
+- [ ] Add docstrings
+- [ ] Add possibility to upload files
+- [ ] Improve template
+  
+  
 ## Feedbacks
 
 If you want to see a new feature, or you have some feedback to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
