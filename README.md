@@ -155,7 +155,7 @@ or
 ```
 ns set -f <bib_file_path>
 ```
-
+**The bib file needs to exist and the file path needs to be absolute.**
 ### Inspecting & clearing the configuration
 
 It is possible to see all the configurations saved by typing:
@@ -195,7 +195,7 @@ This is ~ the nomenclature I used for the citekey [(source)](https://academia.st
 
 <details><summary>Nomenclature</summary>
 
-**Filename:**
+**Filename:**  
 `aaaayyyyxxxx.pdf`
 
 **Where:**  
