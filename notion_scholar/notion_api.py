@@ -14,7 +14,7 @@ def add_publications_to_database(
     for i, publication in enumerate(publications, start=1):
         print(f'{i}/{len(publications)}: {publication}')
         row = cv.collection.add_row()
-        row.name = publication.title
+        row.title = publication.title
         row.abstract = publication.abstract
         row.year = publication.year
         row.bibtex = publication.bibtex
