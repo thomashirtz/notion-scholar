@@ -235,6 +235,13 @@ It is possible to copy the equation in the table view. [Here](https://www.reddit
 
 If you want to see a new feature, or you have some feedback to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
 
+## Buy me a coffee ツ  
+
+If this repository helped you or you if you like this project, feel free to support me!  
+<a href="https://www.paypal.com/donate/?hosted_button_id=2KQR9V6PRSBPC">
+  <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="180" />
+</a>
+  
 ## License
 
      Copyright 2021 Thomas Hirtz
