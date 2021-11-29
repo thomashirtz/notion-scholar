@@ -13,7 +13,7 @@ _Example of a database obtained using notion-scholar._
 ### Requirements
 
 The properties necessary to import publications in the database are the following:
-* title (Name of the page) _(Text)_ 
+* title _(Name of the page)_ 
 * authors _(Text)_
 * year _(Number)_
 * journal _(Text)_
