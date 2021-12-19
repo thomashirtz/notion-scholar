@@ -79,13 +79,13 @@ optional arguments:
 
 </details>
 
-____
+
 
 Four main mode exists: `run`, `set`, ` inspect-config` and `clear-config`. The help can be called this way:
 ```
 ns <mode> --help
 ```
-____
+
 ```
 ns run --help
 ```
@@ -109,7 +109,7 @@ optional arguments:
 
 </details>
 
-____
+
 
 ```
 ns set --help
