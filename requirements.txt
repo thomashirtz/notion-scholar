@@ -2,4 +2,5 @@ keyring
 setuptools
 bibtexparser
 platformdirs
+notion-py
 -e git://github.com/wsykala/notion-py@refs/pull/352/merge#egg=notion
