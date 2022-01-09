@@ -27,7 +27,7 @@ class IllegalArgumentError(NotionScholarError):
 
 def run(
         token: str,
-        database_url: str,
+        database_id: str,
         bib_file_path: Optional[str],
         bib_string: Optional[str],
         save_to_bib_file: bool,
@@ -42,7 +42,7 @@ def run(
     publication_list: List[Publication] = get_publication_list(bib_database)
     key_list = get_publication_key_list_from_database(
         token=token,
-        database_url=database_url
+        database_id=database_id
     )
     publication_list_filtered = filter_publication_list(
         publication_list=publication_list,
@@ -51,7 +51,7 @@ def run(
     add_publications_to_database(
         publications=publication_list_filtered,
         token=token,
-        database_url=database_url
+        database_id=database_id
     )
 
     if not publication_list_filtered and publication_list:

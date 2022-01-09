@@ -16,7 +16,7 @@ def get_parser():
     token = get_token()
     config = get_config()
 
-    def custom_bool(string: str) -> Optional[bool]:
+    def custom_bool(string: str) -> Optional[bool]:  # todo edit how this is done
         if string == "False":
             return False
         elif string == "True":
@@ -43,11 +43,11 @@ def get_parser():
     )
     run_parser.add_argument(
         '-t', '--token', default=None, type=str, metavar='', required=token is None,
-        help=f'Token used to connect to Notion. (Already set? {token is not None})'
+        help=f'Token used to connect to Notion. \n(default: {token})'  # todo manage issue newline https://stackoverflow.com/questions/3853722/how-to-insert-newlines-on-argparse-help-text
     )
     run_parser.add_argument(
-        '-db', '--database-url', default=None, type=str, metavar='',
-        help=f'Database that will be furnished (default: {config.get("database_url", None)})'
+        '-db', '--database-id', default=None, type=str, metavar='',
+        help=f'Database that will be furnished. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})'
     )
 
     if config.get('bib_file_path', None) is None:
@@ -56,7 +56,7 @@ def get_parser():
         group = run_parser.add_argument_group()
     group.add_argument(
         '-f', '--bib-file-path', default=None, type=str, metavar='',
-        help=f'Bib file that will be used. This argument is required if the bib file is not saved in the config and no bib-string is passed. (default: {config.get("bib_file_path", None)})'
+        help=f'Bib file that will be used. This argument is required if the bib file is not saved in the config and no bib-string is passed. \n(default: {config.get("bib_file_path", None)})'
     )
     group.add_argument(
         '-s', '--bib-string', default=None, type=str, metavar='',
@@ -70,19 +70,19 @@ def get_parser():
     )
     setup_parser.add_argument(
         '-f', '--bib-file-path', default=None, type=str, metavar='',
-        help=f'Save the input file path in the user config using "platformdirs". The path must be absolute and the file need to exist. (default: {config.get("bib_file_path", None)})'
+        help=f'Save the input file path in the user config using "platformdirs". The path must be absolute and the file need to exist. (current: {config.get("bib_file_path", None)})'
     )
     setup_parser.add_argument(  # todo clean how to handle boolean
         '-s', '--save', default=None, type=custom_bool, metavar='',
-        help=f'Set whether the entries from "bib-string" will be saved in the bib file. (default: {config.get("save_to_bib_file", True)})'
+        help=f'Set whether the entries from "bib-string" will be saved in the bib file. (current: {config.get("save_to_bib_file", True)})'
     )
     setup_parser.add_argument(
         '-t', '--token', default=None, type=str, metavar='',
-        help='Save the Notion token using "keyring".'
+        help=f'Save the Notion token using "keyring". \n(current: {token})'
     )
     setup_parser.add_argument(
-        '-db', '--database-url', default=None, type=str, metavar='',
-        help=f'Save the database-url in the user config using the library "platformdirs". (default: {config.get("database_url", None)})'
+        '-db', '--database-id', default=None, type=str, metavar='',
+        help=f'Save the database-id in the user config using the library "platformdirs". The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(current: {config.get("database_id", None)})'
     )
 
     # Inspect config parser
@@ -100,7 +100,7 @@ def get_parser():
 
 def sanitize_arguments_and_run(
         token: Optional[str] = None,
-        database_url: Optional[str] = None,
+        database_id: Optional[str] = None,
         bib_file_path: Optional[str] = None,
         bib_string: Optional[str] = None,
         save: Optional[bool] = None,
@@ -114,16 +114,16 @@ def sanitize_arguments_and_run(
         raise ConfigError("The Notion token is not set nor saved.")
 
     config = get_config()
-    database_url = fallback(database_url, config.get("database_url", None))
-    if database_url is None:
-        raise ConfigError("The database_url is not set nor saved.")
+    database_id = fallback(database_id, config.get("database_id", None))
+    if database_id is None:
+        raise ConfigError("The database_id is not set nor saved.")
 
     bib_file_path = fallback(bib_file_path, config.get("bib_file_path", None))
     save_str = config.get("save_to_bib_file", "True")
     save = fallback(save, save_str == "True")
     return run(
         token=token,
-        database_url=database_url,
+        database_id=database_id,
         bib_string=bib_string,
         bib_file_path=bib_file_path,
         save_to_bib_file=save,

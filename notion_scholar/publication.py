@@ -5,7 +5,7 @@ from typing import NamedTuple
 class Publication(NamedTuple):
     key: str
     title: str
-    author: str
+    authors: str
     year: int
     journal: str
     url: str

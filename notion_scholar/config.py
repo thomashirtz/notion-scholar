@@ -66,12 +66,12 @@ def get_config() -> Dict[str, Any]:
 
 def setup(
         token: Optional[str],
-        database_url: Optional[str],
+        database_id: Optional[str],
         bib_file_path: Optional[str],
         save: Optional[bool],
 ) -> None:
     if token is not None:
-        keyring.set_password("notion-scholar", "token", token)  # keyring.get_password("notion-scholar", "token")
+        keyring.set_password("notion-scholar", "token", token)
 
     section_option_list = []
     if bib_file_path is not None:
@@ -79,8 +79,8 @@ def setup(
             section_option_list.append(('paths', 'bib_file_path', bib_file_path))
         else:
             print(f'The file "{bib_file_path}" does not exist, it will not be added to the config file.')
-    if database_url is not None:
-        section_option_list.append(('notion_api', 'database_url', database_url))
+    if database_id is not None:
+        section_option_list.append(('notion_api', 'database_id', database_id))
     if save is not None:
         section_option_list.append(('preferences', 'save_to_bib_file', str(save)))
     add_to_config(section_option_list)
@@ -97,7 +97,7 @@ def inspect() -> None:
 
     config = get_config()
     for key, value in config.items():
-        if key in ['database_url', 'save_to_bib_file', 'bib_file_path']:
+        if key in ['database_id', 'save_to_bib_file', 'bib_file_path']:
             print(f'{key}: {value}')
     print()
 
