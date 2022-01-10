@@ -1,6 +1,7 @@
 import sys
 import argparse
 from typing import Optional
+from distutils.util import strtobool
 
 from notion_scholar.run import run
 
@@ -15,14 +16,6 @@ from notion_scholar.config import ConfigError
 def get_parser():
     token = get_token()
     config = get_config()
-
-    def custom_bool(string: str) -> Optional[bool]:  # todo edit how this is done
-        if string == "False":
-            return False
-        elif string == "True":
-            return True
-        else:
-            return None
 
     parser = argparse.ArgumentParser(
         description='notion-scholar',
@@ -72,8 +65,8 @@ def get_parser():
         '-f', '--bib-file-path', default=None, type=str, metavar='',
         help=f'Save the input file path in the user config using "platformdirs". The path must be absolute and the file need to exist. (current: {config.get("bib_file_path", None)})'
     )
-    setup_parser.add_argument(  # todo clean how to handle boolean
-        '-s', '--save', default=None, type=custom_bool, metavar='',
+    setup_parser.add_argument(
+        '-s', '--save', default=None, type=lambda x: bool(strtobool(x)), metavar='',
         help=f'Set whether the entries from "bib-string" will be saved in the bib file. (current: {config.get("save_to_bib_file", True)})'
     )
     setup_parser.add_argument(
