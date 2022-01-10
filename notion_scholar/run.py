@@ -1,14 +1,14 @@
 from typing import List
 from typing import Optional
+from collections import Counter
 
-from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser import dumps
+from bibtexparser.bibdatabase import BibDatabase
 
+from notion_scholar.bibtex import get_key_list
 from notion_scholar.bibtex import get_publication_list
 from notion_scholar.bibtex import get_bib_database_from_file
 from notion_scholar.bibtex import get_bib_database_from_string
-
-from notion_scholar.utilities import NotionScholarError
 
 from notion_scholar.notion_api import add_publications_to_database
 from notion_scholar.notion_api import get_publication_key_list_from_database
@@ -16,8 +16,7 @@ from notion_scholar.notion_api import get_publication_key_list_from_database
 from notion_scholar.publication import Publication
 from notion_scholar.publication import filter_publication_list
 
-from notion_scholar.bibtex import get_key_list
-from collections import Counter
+from notion_scholar.utilities import NotionScholarError
 from notion_scholar.utilities import append_string_to_file
 
 
@@ -72,5 +71,5 @@ def run(
                 print(f'"{entry["ID"]}" is already present in the file.')
 
         bib_database.entries = entries
-        string = dumps(bib_database)  # todo need to add this into the bibtex module
+        string = dumps(bib_database)
         append_string_to_file(string=string, file_path=bib_file_path)
