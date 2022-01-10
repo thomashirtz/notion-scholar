@@ -1,0 +1,5 @@
+keyring
+setuptools
+bibtexparser
+platformdirs
+notion-client
