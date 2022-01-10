@@ -1,5 +1,6 @@
 import shutil
 import keyring  # https://askubuntu.com/a/881212 Solve issues of keyring with WSL
+import warnings
 from typing import Any
 from typing import Dict
 from typing import List
@@ -8,6 +9,7 @@ from typing import Optional
 from pathlib import Path
 from configparser import ConfigParser
 from platformdirs import user_config_dir
+
 
 from notion_scholar.utilities import NotionScholarError
 
@@ -78,7 +80,7 @@ def setup(
         if Path(bib_file_path).is_file():
             section_option_list.append(('paths', 'bib_file_path', bib_file_path))
         else:
-            print(f'The file "{bib_file_path}" does not exist, it will not be added to the config file.')
+            warnings.warn(f'The file "{bib_file_path}" does not exist, it will not be added to the config file.')
     if database_id is not None:
         section_option_list.append(('notion_api', 'database_id', database_id))
     if save is not None:
