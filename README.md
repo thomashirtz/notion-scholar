@@ -212,7 +212,7 @@ When uploading a BibTex file into the database, the BibTex citekey will be mappe
 
 This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
 
-<details><summary>Nomenclature tips</summary>
+<details><summary>Nomenclature</summary>
 
 **Filename:**  
 `aaaayyyyxxxx.pdf`
