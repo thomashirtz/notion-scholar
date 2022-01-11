@@ -208,11 +208,11 @@ optional arguments:
 ## Tips
 ### Bibtex keys
 
-When uploading a BibTex file into the database, the BibTex citekey will be mapped to the property "filename". This is because it seems convenient to have the same name for the key and the filename. It is therefore advised to change the citekey before uploading to Notion.
+When uploading a BibTex file into the database, the BibTex citekey will be mapped to the property "filename". This is because it seems convenient to have the same name for the key and the filename. **It is therefore advised to change the citekey before uploading to Notion.** (If you want to change it manually afterwards you would need to change both the `Bibtex` and the `Filename` property, which is not very convinient.)
 
 This is ~ the nomenclature I used for the citekey [(source)](https://academia.stackexchange.com/a/139742). Feel free to take inspiration:
 
-<details><summary>Nomenclature</summary>
+<details><summary>Nomenclature tips</summary>
 
 **Filename:**  
 `aaaayyyyxxxx.pdf`
