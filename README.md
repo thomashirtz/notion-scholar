@@ -83,7 +83,7 @@ ns set -t <token> -db <database_id>
 The database_id is one part of the URL:
 `https://www.notion.so/<workspace_name>/<database_id>?v=<view_id>`
 
-### Bib file path
+### 4. Set the bib file path (not required, but recommended)
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
 ns set --bib-file-path <bib_file_path>
@@ -93,7 +93,7 @@ or
 ns set -f <bib_file_path>
 ```
 **The bib file needs to exist and the file path needs to be absolute.**
-### Inspecting & clearing the configuration
+## Inspecting & clearing the configuration
 
 It is possible to see all the configurations saved by typing:
 ```
@@ -104,7 +104,7 @@ Moreover, it is possible to erase all the config saved (token, database_url, ...
 ns clear-config
 ```
 
-### How to use ?
+## How to use ?
 
 There is three main way to use this application:
 
@@ -129,9 +129,7 @@ For getting help it is possible to call:
 ```
 ns --help
 ```
-
-<details><summary>Output:</summary>
-  
+ 
 ```
 usage: Use "notion-scholar --help" or "ns --help" for more information
 
@@ -149,20 +147,18 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-</details>
-
-
-
 Four main mode exists: `run`, `set`, ` inspect-config` and `clear-config`. The help can be called this way:
 ```
 ns <mode> --help
 ```
 
+<details><summary>Details of the run, set, inspect-config and clear-config help:</summary>
+  
+  
 ```
 ns run --help
 ```
-<details><summary>Output:</summary>
-  
+
 ```
 usage: Use "notion-scholar --help" or "ns --help" for more information run [-h] [-t] [-db] [-f] [-s]
 
@@ -179,14 +175,9 @@ optional arguments:
                         by changing the "save" option: "ns setup -save false".
 ```
 
-</details>
-
-
-
 ```
 ns set --help
 ```
-<details><summary>Output:</summary>
   
 ```
 usage: Use "notion-scholar --help" or "ns --help" for more information set [-h] [-f] [-s] [-t] [-db]
