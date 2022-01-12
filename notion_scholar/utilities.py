@@ -11,5 +11,5 @@ def append_string_to_file(string: str, file_path: str) -> None:
         f.write(string)
 
 
-def get_duplicates(lst: list):
+def get_duplicates(lst: list) -> list:
     return [k for k, v in Counter(lst).items() if v > 1]
