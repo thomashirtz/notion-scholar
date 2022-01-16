@@ -11,11 +11,12 @@ from notion_scholar.utilities import get_duplicates
 
 def get_bib_database_from_file(file_path: str) -> BibDatabase:
     with open(file_path) as bibtex_file:
-        return load(bibtex_file)
+        parser = BibTexParser(common_strings=True)
+        return load(bibtex_file, parser=parser)
 
 
 def get_bib_database_from_string(string: str) -> BibDatabase:
-    bibtex_parser = BibTexParser(interpolate_strings=False)
+    bibtex_parser = BibTexParser(interpolate_strings=False, common_strings=True)
     return bibtex_parser.parse(string)
 
 
