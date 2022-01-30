@@ -6,7 +6,6 @@ from bibtexparser.bparser import BibTexParser
 from bibtexparser.bibdatabase import BibDatabase
 
 from notion_scholar.publication import Publication
-from notion_scholar.utilities import get_duplicates
 
 
 def get_bib_database_from_file(file_path: str) -> BibDatabase:
@@ -80,18 +79,3 @@ def get_key_list(bib_file_path: str) -> list:
     """
     bib_database = get_bib_database_from_file(bib_file_path)
     return [entry['ID'] for entry in bib_database.entries]
-
-
-def get_duplicate_key_list(bib_file_path: str) -> list:
-    """
-    Read a BibTex file and return the list of paper IDs that are in
-    duplicate in the file.
-
-    Args:
-        bib_file_path: path of the file that needs to be inspected.
-
-    Returns:
-        List of IDs.
-    """
-    key_list = get_key_list(bib_file_path)
-    return get_duplicates(key_list)

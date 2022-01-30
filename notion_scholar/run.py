@@ -1,6 +1,5 @@
 from typing import List
 from typing import Optional
-from collections import Counter
 
 from bibtexparser import dumps
 from bibtexparser.bibdatabase import BibDatabase
@@ -16,8 +15,9 @@ from notion_scholar.notion_api import get_publication_key_list_from_database
 from notion_scholar.publication import Publication
 from notion_scholar.publication import filter_publication_list
 
-from notion_scholar.utilities import NotionScholarError
 from notion_scholar.utilities import append_string_to_file
+from notion_scholar.utilities import get_duplicates
+from notion_scholar.utilities import NotionScholarError
 
 
 class IllegalArgumentError(NotionScholarError):
@@ -58,7 +58,7 @@ def run(
 
     if bib_string is not None and save_to_bib_file:
         key_list = get_key_list(bib_file_path)
-        duplicates = [k for k, v in Counter(key_list).items() if v > 1]
+        duplicates = get_duplicates(key_list)
         if duplicates:
             print(f"\nWarning! There is duplicates in the file: {duplicates}")
 
