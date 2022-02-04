@@ -9,8 +9,7 @@ from notion_scholar.publication import Publication
 
 
 def get_bib_database_from_file(file_path: str) -> BibDatabase:
-    """
-    Read a file and parse the BibTex entries present in it.
+    """Read a file and parse the BibTex entries present in it.
 
     Args:
         file_path: path of the file that needs to be parsed.
@@ -25,8 +24,7 @@ def get_bib_database_from_file(file_path: str) -> BibDatabase:
 
 
 def get_bib_database_from_string(string: str) -> BibDatabase:
-    """
-    Create a BibDatabase object from a string of BibTex entries.
+    """Create a BibDatabase object from a string of BibTex entries.
 
     Args:
         string: string containing the BibTex entries.
@@ -40,8 +38,7 @@ def get_bib_database_from_string(string: str) -> BibDatabase:
 
 
 def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
-    """
-    Convert a BibDatabase object into a list of "Publication"s.
+    """Convert a BibDatabase object into a list of "Publication"s.
 
     Args:
         bib_database: a BibDatabase object.
@@ -68,8 +65,7 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
 
 
 def get_key_list(bib_file_path: str) -> list:
-    """
-    Read a BibTex file and return the list of ID of the paper present in it.
+    """Read a BibTex file and return the list of ID of the paper present in it.
 
     Args:
         bib_file_path: path of the file that needs to be inspected.
