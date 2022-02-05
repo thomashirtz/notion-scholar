@@ -1,5 +1,6 @@
 from typing import List
 from typing import Any
+from typing import Callable
 from notion_client import Client
 
 from notion_scholar.publication import Publication
@@ -44,9 +45,10 @@ def add_publications_to_database(
         )
 
 
-def get_publication_key_list_from_database(
+def get_property_list_from_database(
         token: str,
         database_id: str,
+        retriever: Callable[[dict], Any],
         page_size: int = 100,
 ) -> List[str]:
     notion = Client(auth=token)
@@ -61,7 +63,41 @@ def get_publication_key_list_from_database(
     key_list = []
     for result in results:
         try:
-            key_list.append(result['properties']['Filename']['rich_text'][0]['plain_text'])
+            key_list.append(retriever(result))
         except IndexError:
             pass
     return key_list
+
+
+def get_publication_key_list_from_database(
+        token: str,
+        database_id: str,
+        page_size: int = 100,
+) -> List[str]:
+
+    def retrieve_publication_key(result: dict) -> str:
+        return result['properties']['Filename']['rich_text'][0]['plain_text']
+
+    return get_property_list_from_database(
+        token=token,
+        database_id=database_id,
+        retriever=retrieve_publication_key,
+        page_size=page_size,
+    )
+
+
+def get_bibtex_string_list_from_database(
+        token: str,
+        database_id: str,
+        page_size: int = 100,
+) -> List[str]:
+
+    def retrieve_bibtex_string(result: dict) -> str:
+        return result['properties']['Bibtex']['rich_text'][0]['plain_text']
+
+    return get_property_list_from_database(
+        token=token,
+        database_id=database_id,
+        retriever=retrieve_bibtex_string,
+        page_size=page_size,
+    )

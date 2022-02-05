@@ -72,4 +72,4 @@ def run(
 
         bib_database.entries = entries
         string = dumps(bib_database)
-        append_string_to_file(string=string, file_path=bib_file_path)
+        append_string_to_file(content=string, file_path=bib_file_path)

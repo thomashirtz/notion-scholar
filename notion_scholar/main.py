@@ -11,6 +11,8 @@ from notion_scholar.config import inspect
 from notion_scholar.config import get_token
 from notion_scholar.config import get_config
 from notion_scholar.config import ConfigError
+from notion_scholar.notion_api import get_bibtex_string_list_from_database
+from notion_scholar.utilities import write_to_file
 
 
 def get_parser():
@@ -83,10 +85,29 @@ def get_parser():
         "inspect-config", parents=[parent_parser],
         help='Inspect the notion-scholar config.'
     )
-    # Inspect config parser
+
+    # Clear config parser
     clear_parser = subparsers.add_parser(
         "clear-config", parents=[parent_parser],
         help='Clear the notion-scholar config.'
+    )
+
+    # Download bibtex parser
+    download_parser = subparsers.add_parser(
+        "download", parents=[parent_parser],
+        help='Download the bibtex entries present in the database.'
+    )
+    download_parser.add_argument(
+        '-f', '--file-path', default=None, type=str, metavar='', required=True,
+        help=f'File in which the bibtex entries will be saved'
+    )
+    download_parser.add_argument(  # todo group these argparse with the run function
+        '-t', '--token', default=None, type=str, metavar='', required=token is None,
+        help=f'Token used to connect to Notion. \n(default: {token})'  # todo manage issue newline https://stackoverflow.com/questions/3853722/how-to-insert-newlines-on-argparse-help-text
+    )
+    download_parser.add_argument( # todo group these argparse with the run function
+        '-db', '--database-id', default=None, type=str, metavar='',
+        help=f'Database that will be furnished. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})'
     )
     return parser
 
@@ -123,6 +144,32 @@ def sanitize_arguments_and_run(
     )
 
 
+def sanitize_arguments_and_download(
+        file_path: str,
+        token: Optional[str] = None,
+        database_id: Optional[str] = None,
+        **kwargs,  # todo clean function
+):
+    def fallback(choice_1, choice_2):  # todo put in utilities
+        return choice_1 if choice_1 is not None else choice_2
+
+    token = fallback(token, get_token())  # todo share those checks with run
+    if token is None:
+        raise ConfigError("The Notion token is not set nor saved.")
+
+    config = get_config()
+    database_id = fallback(database_id, config.get("database_id", None))
+    if database_id is None:
+        raise ConfigError("The database_id is not set nor saved.")
+
+    bibtex_str_list = get_bibtex_string_list_from_database(
+        token=token,
+        database_id=database_id,
+    )
+    print(bibtex_str_list)
+    write_to_file(content='\n\n'.join(bibtex_str_list), file_path=file_path)
+
+
 def main():
     parser = get_parser()
     arguments = parser.parse_args()
@@ -142,5 +189,7 @@ def main():
         inspect()
     elif mode == 'clear-config':
         clear()
+    elif mode == 'download':
+        sanitize_arguments_and_download(**kwargs)
     else:
         raise NotImplementedError
