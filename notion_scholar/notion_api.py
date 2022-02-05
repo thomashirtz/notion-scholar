@@ -1,24 +1,33 @@
 from typing import List
 from typing import Any
+from typing import Union
 from typing import Callable
+
 from notion_client import Client
 
 from notion_scholar.publication import Publication
 
 
-def property_dict(property_type: str, value: Any) -> dict:
-    if property_type == 'title':
+class Property:
+    @staticmethod
+    def title(value: str) -> dict:
         return {'title': [{"text": {"content": value}}]}
-    elif property_type == 'rich_text':
+
+    @staticmethod
+    def rich_text(value: str) -> dict:
         return {"rich_text": [{"text": {"content": value}}]}
-    elif property_type == 'number':
+
+    @staticmethod
+    def number(value: Union[int, float]) -> dict:
         return {"number": value}
-    elif property_type == 'url':
+
+    @staticmethod
+    def url(value: str) -> dict:
         return {"url": value if value else None}
-    elif property_type == 'checkbox':
+
+    @staticmethod
+    def checkbox(value: bool) -> dict:
         return {"checkbox": value}
-    else:
-        raise NotImplementedError
 
 
 def add_publications_to_database(
@@ -32,15 +41,15 @@ def add_publications_to_database(
         client.pages.create(
             parent={'database_id': database_id},
             properties={
-                'Title': property_dict('title', publication.title),
-                "Abstract": property_dict('rich_text', publication.abstract),
-                "Bibtex": property_dict('rich_text', publication.bibtex),
-                "Filename": property_dict('rich_text', publication.key),
-                "Journal": property_dict('rich_text', publication.journal),
-                "Authors": property_dict('rich_text', publication.authors),
-                "Year": property_dict('number', publication.year),
-                "URL": property_dict('url', publication.url),
-                "Inbox": property_dict('checkbox', True),
+                'Title': Property.title(publication.title),
+                "Abstract": Property.rich_text(publication.abstract),
+                "Bibtex": Property.rich_text(publication.bibtex),
+                "Filename": Property.rich_text(publication.key),
+                "Journal": Property.rich_text(publication.journal),
+                "Authors": Property.rich_text(publication.authors),
+                "Year": Property.number(publication.year),
+                "URL": Property.url(publication.url),
+                "Inbox": Property.checkbox(True),
             }
         )
 
@@ -56,7 +65,7 @@ def get_property_list_from_database(
     results = []
     query = notion.databases.query(database_id=database_id, page_size=page_size)
     results.extend(query['results'])
-    while query['next_cursor']:
+    while query['next_cursor']:  # todo simplify when the new version of notion-sdk is out
         query = notion.databases.query(database_id=database_id, start_cursor=query['next_cursor'], page_size=page_size)
         results.extend(query['results'])
 
