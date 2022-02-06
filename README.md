@@ -238,6 +238,11 @@ It is possible to copy the equation in the table view. [Here](https://www.reddit
 - [ ] Add docstrings
 - [ ] Add possibility to upload files
 - [ ] Improve template
+- [ ] Create tests
+- [ ] Remove string option
+- [ ] Clean code sanitization 
+- [ ] Group arguments 
+- [ ] Simplify database querying
 
 
 ## Feedbacks
