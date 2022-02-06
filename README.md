@@ -235,6 +235,7 @@ It is possible to copy the equation in the table view. [Here](https://www.reddit
 
 ## To-do
 
+- [ ] Improve README.md
 - [ ] Add docstrings
 - [ ] Add possibility to upload files
 - [ ] Improve template
