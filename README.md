@@ -1,10 +1,10 @@
 # notion-scholar
 
-Reference management solution using Python and Notion. 
+Reference management solution using Python and Notion.
 
 The main idea of this app is to allow to furnish a Notion database using a BibTex formatted string or file. It also helps you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
 
-## Database 
+## Database
 
 ![publication-database](ressources/notion-scholar-0-database.png)
 
@@ -13,7 +13,7 @@ _Example of a database obtained using notion-scholar._
 ### Requirements
 
 The properties necessary to import publications in the database are the following:
-* title _(Name of the page)_ 
+* title _(Name of the page)_
 * authors _(Text)_
 * year _(Number)_
 * journal _(Text)_
@@ -21,20 +21,20 @@ The properties necessary to import publications in the database are the followin
 * url _(URL)_
 * abstract _(Text)_
 * bibtex _(Text)_
-* inbox _(Checkbox)_  
+* inbox _(Checkbox)_
 
 The properties can have any capitalization.
 
-## Template 
+## Template
 
 <details><summary>Dashboard template images</summary>
 
 ![inbox](ressources/notion-scholar-1-inbox.png)
 ![fields](ressources/notion-scholar-2-fields.png)
 ![by-status](ressources/notion-scholar-3-by-status.png)
-![by-field](ressources/notion-scholar-4-by-field.png)  
+![by-field](ressources/notion-scholar-4-by-field.png)
 ![by-filename](ressources/notion-scholar-5-by-filename.png)
-____  
+____
 ![field-page](ressources/notion-scholar-6-field-page.png)
 
 </details>
@@ -50,7 +50,7 @@ pip install git+https://github.com/thomashirtz/notion-scholar#egg=notion-scholar
 ```
 You can now call the application using `notion-scholar` or `ns`
 
-## Setting up 
+## Setting up
 
 ### 1. Creation of an integration
 
@@ -64,7 +64,7 @@ Option needed:
 
 Copy the `Internal Integration Token` for the [step 3](#3-set-the-token-and-database_id-in-notion-scholar).
 
-### 2. Share the database with the Integration  
+### 2. Share the database with the Integration
 
 Go to your database in notion => Click on Share => Invite => Select the integration that you just created.
 
@@ -112,24 +112,24 @@ There is three main way to use this application:
 ```
 ns run
 ```
-2. Giving the `bib-file-path` argument: 
+2. Giving the `bib-file-path` argument:
 ```
 ns run -f <bib-file-path>
 ```
-3. Giving a `bib-string` argument (/!\ be careful to type three quotes `"""` before pasting the `bib-string`) : 
+3. Giving a `bib-string` argument (/!\ be careful to type three quotes `"""` before pasting the `bib-string`) :
 
 ```
 ns run -s """"<bib-string>"""
 ```
 **The `--token` (`-t`) and the `--database_url` (`-db`) are also required, however, if they have been `set`, they don't need to be added again to the argument list.**
-  
+
 ## Help
 
 For getting help it is possible to call:
 ```
 ns --help
 ```
- 
+
 ```
 usage: Use "notion-scholar --help" or "ns --help" for more information
 
@@ -153,8 +153,8 @@ ns <mode> --help
 ```
 
 <details><summary>Details of the run, set, inspect-config and clear-config help:</summary>
-  
-  
+
+
 ```
 ns run --help
 ```
@@ -178,7 +178,7 @@ optional arguments:
 ```
 ns set --help
 ```
-  
+
 ```
 usage: Use "notion-scholar --help" or "ns --help" for more information set [-h] [-f] [-s] [-t] [-db]
 
@@ -205,52 +205,52 @@ This is ~ the nomenclature I used for the citekey [(source)](https://academia.st
 
 <details><summary>Nomenclature</summary>
 
-**Filename:**  
+**Filename:**
 `aaaayyyyxxxx.pdf`
 
-**Where:**  
+**Where:**
 - `aaaa`: Name of the first author (variable length)
 - `yyyy`: Year of publication (fixed length)
 - `xxxx`: First word of title, minus articles and other small words (variable length)
 
-**For example:**  
+**For example:**
 Attention Is All You Need, Ashish Vaswani et al., 2017
 
-**Would give:**  
+**Would give:**
 `vaswani2017attention.pdf`
 
 If an author publish two papers the same year with the same beginning first word, it is possible to add an `1` and `2` depending on which one was the first released.
 
-For example:  
+For example:
 - Soft Actor-Critic Algorithms and Applications, Tuomas Haarnoja et al., 2018
   `haarnoja2018soft1.pdf`
 - Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor, Tuomas Haarnoja et al., 2018
   `haarnoja2018soft2.pdf`
 
 </details>
-    
+
 ### Copy equation properties
 
 It is possible to copy the equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
 
 ## To-do
-  
+
 - [ ] Add docstrings
 - [ ] Add possibility to upload files
 - [ ] Improve template
-  
-  
+
+
 ## Feedbacks
 
 If you want to see a new feature, or you have some feedback to give, feel free to email me at [thomashirtz@pm.me](mailto:thomashirtz@pm.me).
 
-## Buy me a coffee ツ  
+## Buy me a coffee ツ
 
-If this repository helped you or you if you like this project, feel free to support me!  
+If this repository helped you or you if you like this project, feel free to support me!
 <a href="https://www.paypal.com/donate/?hosted_button_id=2KQR9V6PRSBPC">
   <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="180" />
 </a>
-  
+
 ## License
 
      Copyright 2021 Thomas Hirtz
@@ -266,4 +266,3 @@ If this repository helped you or you if you like this project, feel free to supp
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-

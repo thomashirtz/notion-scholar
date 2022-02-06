@@ -11,23 +11,23 @@ from notion_scholar.publication import Publication
 class Property:
     @staticmethod
     def title(value: str) -> dict:
-        return {'title': [{"text": {"content": value}}]}
+        return {'title': [{'text': {'content': value}}]}
 
     @staticmethod
     def rich_text(value: str) -> dict:
-        return {"rich_text": [{"text": {"content": value}}]}
+        return {'rich_text': [{'text': {'content': value}}]}
 
     @staticmethod
     def number(value: Union[int, float]) -> dict:
-        return {"number": value}
+        return {'number': value}
 
     @staticmethod
     def url(value: str) -> dict:
-        return {"url": value if value else None}
+        return {'url': value if value else None}
 
     @staticmethod
     def checkbox(value: bool) -> dict:
-        return {"checkbox": value}
+        return {'checkbox': value}
 
 
 def add_publications_to_database(
@@ -42,15 +42,15 @@ def add_publications_to_database(
             parent={'database_id': database_id},
             properties={
                 'Title': Property.title(publication.title),
-                "Abstract": Property.rich_text(publication.abstract),
-                "Bibtex": Property.rich_text(publication.bibtex),
-                "Filename": Property.rich_text(publication.key),
-                "Journal": Property.rich_text(publication.journal),
-                "Authors": Property.rich_text(publication.authors),
-                "Year": Property.number(publication.year),
-                "URL": Property.url(publication.url),
-                "Inbox": Property.checkbox(True),
-            }
+                'Abstract': Property.rich_text(publication.abstract),
+                'Bibtex': Property.rich_text(publication.bibtex),
+                'Filename': Property.rich_text(publication.key),
+                'Journal': Property.rich_text(publication.journal),
+                'Authors': Property.rich_text(publication.authors),
+                'Year': Property.number(publication.year),
+                'URL': Property.url(publication.url),
+                'Inbox': Property.checkbox(True),
+            },
         )
 
 
@@ -63,10 +63,16 @@ def get_property_list_from_database(
     notion = Client(auth=token)
 
     results = []
-    query = notion.databases.query(database_id=database_id, page_size=page_size)
+    query = notion.databases.query(
+        database_id=database_id, page_size=page_size,
+    )
     results.extend(query['results'])
-    while query['next_cursor']:  # todo simplify when the new version of notion-sdk is out
-        query = notion.databases.query(database_id=database_id, start_cursor=query['next_cursor'], page_size=page_size)
+    while query['next_cursor']:  # todo simplify
+        query = notion.databases.query(
+            database_id=database_id,
+            start_cursor=query['next_cursor'],
+            page_size=page_size,
+        )
         results.extend(query['results'])
 
     key_list = []

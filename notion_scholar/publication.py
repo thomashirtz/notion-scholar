@@ -13,7 +13,7 @@ class Publication(NamedTuple):
     bibtex: str
     abstract: str
 
-    def __str__(self):
+    def __str__(self):  # noqa TYP004
         return f'Publication(key="{self.key}", title="{self.title}")'
 
 

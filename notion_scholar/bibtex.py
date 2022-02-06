@@ -1,9 +1,9 @@
 from typing import List
 
-from bibtexparser import load
 from bibtexparser import dumps
-from bibtexparser.bparser import BibTexParser
+from bibtexparser import load
 from bibtexparser.bibdatabase import BibDatabase
+from bibtexparser.bparser import BibTexParser
 
 from notion_scholar.publication import Publication
 
@@ -33,7 +33,9 @@ def get_bib_database_from_string(string: str) -> BibDatabase:
         BibDatabase object that contains the instances present in the
         string.
     """
-    bibtex_parser = BibTexParser(interpolate_strings=False, common_strings=True)
+    bibtex_parser = BibTexParser(
+        interpolate_strings=False, common_strings=True,
+    )
     return bibtex_parser.parse(string)
 
 
@@ -51,16 +53,18 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
         db = BibDatabase()
         db.entries = [entry]
         bibtex_str = dumps(db)
-        publications.append(Publication(
-            key=entry.get('ID', ''),
-            title=entry.get('title', ''),
-            authors=entry.get('author', '').replace("\n", " "),
-            year=int(entry.get('year', '')),
-            journal=entry.get('journal', ''),
-            url=entry.get('url', ''),
-            abstract=entry.get('abstract', ''),
-            bibtex=bibtex_str,
-        ))
+        publications.append(
+            Publication(
+                key=entry.get('ID', ''),
+                title=entry.get('title', ''),
+                authors=entry.get('author', '').replace('\n', ' '),
+                year=int(entry.get('year', '')),
+                journal=entry.get('journal', ''),
+                url=entry.get('url', ''),
+                abstract=entry.get('abstract', ''),
+                bibtex=bibtex_str,
+            ),
+        )
     return publications
 
 
