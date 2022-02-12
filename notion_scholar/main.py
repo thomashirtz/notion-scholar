@@ -159,20 +159,20 @@ def main():
 
     if mode == 'run':
         kwargs = sanitize_arguments(**kwargs)
-        run(**kwargs)
+        return run(**kwargs)
 
     elif mode == 'download':
         kwargs = sanitize_arguments(**kwargs)
-        download(**kwargs)
+        return download(**kwargs)
 
     elif mode == 'set':
-        setup(**kwargs)
+        return setup(**kwargs)
 
     elif mode == 'inspect-config':
-        inspect()
+        return inspect()
 
     elif mode == 'clear-config':
-        clear()
+        return clear()
 
     else:
         raise NotImplementedError
