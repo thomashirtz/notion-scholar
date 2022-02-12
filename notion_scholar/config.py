@@ -76,6 +76,8 @@ def setup(
         keyring.set_password('notion-scholar', 'token', token)
 
     section_option_list = []
+    if database_id is not None:
+        section_option_list.append(('notion_api', 'database_id', database_id))
     if bib_file_path is not None:
         if Path(bib_file_path).is_file():
             section_option_list.append(
@@ -85,8 +87,6 @@ def setup(
             warnings.warn(
                 f'The file "{bib_file_path}" does not exist, it will not be added to the config file.',  # noqa 501
             )
-    if database_id is not None:
-        section_option_list.append(('notion_api', 'database_id', database_id))
     if save is not None:
         section_option_list.append(
             ('preferences', 'save_to_bib_file', str(save)),
