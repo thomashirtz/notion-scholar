@@ -146,7 +146,7 @@ def sanitize_arguments(**kwargs):
     return kwargs
 
 
-def main():
+def main() -> int:
     parser = get_parser()
     arguments = parser.parse_args()
 
@@ -159,20 +159,22 @@ def main():
 
     if mode == 'run':
         kwargs = sanitize_arguments(**kwargs)
-        return run(**kwargs)
+        run(**kwargs)
 
     elif mode == 'download':
         kwargs = sanitize_arguments(**kwargs)
-        return download(**kwargs)
+        download(**kwargs)
 
     elif mode == 'set':
-        return setup(**kwargs)
+        setup(**kwargs)
 
     elif mode == 'inspect-config':
-        return inspect()
+        inspect()
 
     elif mode == 'clear-config':
-        return clear()
+        clear()
 
     else:
         raise NotImplementedError
+
+    return 0
