@@ -1,9 +1,10 @@
 import sys
 import argparse
-from typing import Optional
 from distutils.util import strtobool
 
 from notion_scholar.run import run
+from notion_scholar.download import download
+from notion_scholar.utilities import fallback
 
 from notion_scholar.config import clear
 from notion_scholar.config import setup
@@ -11,8 +12,6 @@ from notion_scholar.config import inspect
 from notion_scholar.config import get_token
 from notion_scholar.config import get_config
 from notion_scholar.config import ConfigError
-from notion_scholar.notion_api import get_bibtex_string_list_from_database
-from notion_scholar.utilities import write_to_file
 
 
 def get_parser():
@@ -125,62 +124,26 @@ def get_parser():
     return parser
 
 
-def sanitize_arguments_and_run(
-        token: Optional[str] = None,
-        database_id: Optional[str] = None,
-        bib_file_path: Optional[str] = None,
-        bib_string: Optional[str] = None,
-        save: Optional[bool] = None,
-        **kwargs,  # todo clean function
-):
-    def fallback(choice_1, choice_2):
-        return choice_1 if choice_1 is not None else choice_2
-
-    token = fallback(token, get_token())
-    if token is None:
-        raise ConfigError('The Notion token is not set nor saved.')
-
+def sanitize_arguments(**kwargs):
     config = get_config()
-    database_id = fallback(database_id, config.get('database_id', None))
-    if database_id is None:
-        raise ConfigError('The database_id is not set nor saved.')
 
-    bib_file_path = fallback(bib_file_path, config.get('bib_file_path', None))
-    save_str = config.get('save_to_bib_file', 'True')
-    save_to_bib_file = fallback(save, save_str == 'True')
-    return run(
-        token=token,
-        database_id=database_id,
-        bib_string=bib_string,
-        bib_file_path=bib_file_path,
-        save_to_bib_file=save_to_bib_file,
-    )
+    if 'token' in kwargs:
+        kwargs['token'] = fallback(kwargs['token'], get_token())
+        if kwargs['token'] is None:
+            raise ConfigError('The Notion token is not set nor saved.')
 
+    if 'database_id' in kwargs:
+        kwargs['database_id'] = fallback(kwargs['database_id'], config.get('database_id', None))  # noqa: E501
+        if kwargs['database_id'] is None:
+            raise ConfigError('The database_id is not set nor saved.')
 
-def sanitize_arguments_and_download(
-        file_path: str,
-        token: Optional[str] = None,
-        database_id: Optional[str] = None,
-        **kwargs,  # todo clean function
-):
-    def fallback(choice_1, choice_2):  # todo put in utilities
-        return choice_1 if choice_1 is not None else choice_2
+    if 'bib_file_path' in kwargs:
+        kwargs['bib_file_path'] = fallback(kwargs['bib_file_path'], config.get('bib_file_path', None))  # noqa: E501
 
-    token = fallback(token, get_token())  # todo share those checks with run
-    if token is None:
-        raise ConfigError('The Notion token is not set nor saved.')
+    if 'save_to_bib_file' in kwargs:
+        kwargs['save_to_bib_file'] = fallback(kwargs['save_to_bib_file'], config.get('save_to_bib_file', 'True'))  # noqa: E501
 
-    config = get_config()
-    database_id = fallback(database_id, config.get('database_id', None))
-    if database_id is None:
-        raise ConfigError('The database_id is not set nor saved.')
-
-    bibtex_str_list = get_bibtex_string_list_from_database(
-        token=token,
-        database_id=database_id,
-    )
-    print(bibtex_str_list)
-    write_to_file(content='\n\n'.join(bibtex_str_list), file_path=file_path)
+    return kwargs
 
 
 def main():
@@ -195,14 +158,21 @@ def main():
     mode = kwargs.pop('mode', None)
 
     if mode == 'run':
-        sanitize_arguments_and_run(**kwargs)
+        kwargs = sanitize_arguments(**kwargs)
+        run(**kwargs)
+
+    elif mode == 'download':
+        kwargs = sanitize_arguments(**kwargs)
+        download(**kwargs)
+
     elif mode == 'set':
         setup(**kwargs)
+
     elif mode == 'inspect-config':
         inspect()
+
     elif mode == 'clear-config':
         clear()
-    elif mode == 'download':
-        sanitize_arguments_and_download(**kwargs)
+
     else:
         raise NotImplementedError

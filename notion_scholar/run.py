@@ -26,7 +26,7 @@ def run(
         database_id: str,
         bib_file_path: Optional[str],
         bib_string: Optional[str],
-        save_to_bib_file: bool,
+        save_to_bib_file: bool = True,
 ) -> None:
     if bib_string is not None:
         bib_database: BibDatabase = get_bib_database_from_string(

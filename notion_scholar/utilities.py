@@ -38,3 +38,8 @@ def write_to_file(file_path: str, content: str) -> None:
     """
     with open(file_path, 'w') as f:
         f.write(content)
+
+
+def fallback(choice_1, choice_2):
+    """Fallback function to use choice_2 if choice_1 is None"""
+    return choice_1 if choice_1 is not None else choice_2
