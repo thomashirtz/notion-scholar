@@ -67,7 +67,7 @@ def get_property_list_from_database(
         database_id=database_id, page_size=page_size,
     )
     results.extend(query['results'])
-    while query['next_cursor']:  # todo simplify
+    while query['next_cursor'] or (query['results'] is None and not results):
         query = notion.databases.query(
             database_id=database_id,
             start_cursor=query['next_cursor'],

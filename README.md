@@ -73,11 +73,11 @@ Copy the link of the database (simply the URL on a browser, on the application =
 ### 3. Set the token and database_id in notion-scholar
 For the first use, it is recommended to set up the configuration file. The main parameters to save are the token (which will be securely saved using the ["keyring"](https://pypi.org/project/keyring/) library) and the database-url.
 ```
-ns set --token <token> --database-id <database_id>
+ns set-config --token <token> --database-id <database_id>
 ```
 or
 ```
-ns set -t <token> -db <database_id>
+ns set-config -t <token> -db <database_id>
 ```
 
 The database_id is one part of the URL:
@@ -86,11 +86,11 @@ The database_id is one part of the URL:
 ### 4. Set the bib file path (not required, but recommended)
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
-ns set --bib-file-path <bib_file_path>
+ns set-config --bib-file-path <bib_file_path>
 ```
 or
 ```
-ns set -f <bib_file_path>
+ns set-config -f <bib_file_path>
 ```
 **The bib file needs to exist and the file path needs to be absolute.**
 ## Inspecting & clearing the configuration
@@ -136,10 +136,10 @@ usage: Use "notion-scholar --help" or "ns --help" for more information
 notion-scholar
 
 positional arguments:
-  {run,set,inspect-config,clear-config}
+  {run,set-config,inspect-config,clear-config}
                         Selection of the action
     run                 Run notion-scholar.
-    set                 Save the default values of notion-scholar.
+    set-config          Save the default values of notion-scholar.
     inspect-config      Inspect the notion-scholar config.
     clear-config        Clear the notion-scholar config.
 
@@ -147,12 +147,12 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-Four main mode exists: `run`, `set`, ` inspect-config` and `clear-config`. The help can be called this way:
+Four main mode exists: `run`, `set-config`, ` inspect-config` and `clear-config`. The help can be called this way:
 ```
 ns <mode> --help
 ```
 
-<details><summary>Details of the run, set, inspect-config and clear-config help:</summary>
+<details><summary>Details of the run, set-config, inspect-config and clear-config help:</summary>
 
 
 ```
@@ -176,7 +176,7 @@ optional arguments:
 ```
 
 ```
-ns set --help
+ns set-config --help
 ```
 
 ```
@@ -241,9 +241,7 @@ It is possible to copy the equation in the table view. [Here](https://www.reddit
 - [ ] Improve template
 - [ ] Create tests
 - [ ] Remove string option
-- [ ] Clean code sanitization
 - [ ] Group arguments
-- [ ] Simplify database querying
 
 
 ## Feedbacks

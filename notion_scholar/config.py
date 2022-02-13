@@ -11,10 +11,10 @@ from typing import Tuple
 import keyring  # https://askubuntu.com/a/881212 Solve issues of keyring w/ WSL
 from platformdirs import user_config_dir
 
-from notion_scholar.utilities import NotionScholarError
+from notion_scholar.utilities import NotionScholarException
 
 
-class ConfigError(NotionScholarError):
+class ConfigException(NotionScholarException):
     """A config exception class for notion-scholar."""
 
 
@@ -71,7 +71,7 @@ def setup(
         database_id: Optional[str],
         bib_file_path: Optional[str],
         save: Optional[bool],
-) -> None:
+) -> int:
     if token is not None:
         keyring.set_password('notion-scholar', 'token', token)
 
@@ -92,9 +92,10 @@ def setup(
             ('preferences', 'save_to_bib_file', str(save)),
         )
     add_to_config(section_option_list)
+    return 0
 
 
-def inspect() -> None:
+def inspect() -> int:
     directory_path = Path(user_config_dir(appname='notion-scholar'))
     config_path = directory_path.joinpath('config').with_suffix('.ini')
     token = get_token()
@@ -108,9 +109,11 @@ def inspect() -> None:
         if key in ['database_id', 'save_to_bib_file', 'bib_file_path']:
             print(f'{key}: {value}')
     print()
+    return 0
 
 
-def clear() -> None:
+def clear() -> int:
     directory_path = Path(user_config_dir(appname='notion-scholar'))
     shutil.rmtree(directory_path, ignore_errors=True)
     keyring.delete_password('notion-scholar', 'token')
+    return 0

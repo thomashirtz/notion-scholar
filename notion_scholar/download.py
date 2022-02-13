@@ -11,7 +11,8 @@ def download(
         token=token,
         database_id=database_id,
     )
-    return write_to_file(
+    write_to_file(
         content='\n\n'.join(bibtex_str_list),
         file_path=file_path,
     )
+    return 0

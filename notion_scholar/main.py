@@ -11,7 +11,7 @@ from notion_scholar.config import setup
 from notion_scholar.config import inspect
 from notion_scholar.config import get_token
 from notion_scholar.config import get_config
-from notion_scholar.config import ConfigError
+from notion_scholar.config import ConfigException
 
 
 def get_parser():
@@ -65,7 +65,7 @@ def get_parser():
 
     # Setup parser
     setup_parser = subparsers.add_parser(
-        'set', parents=[parent_parser],
+        'set-config', parents=[parent_parser],
         help='Save the default values of notion-scholar.',
     )
     setup_parser.add_argument(
@@ -130,12 +130,12 @@ def sanitize_arguments(**kwargs):
     if 'token' in kwargs:
         kwargs['token'] = fallback(kwargs['token'], get_token())
         if kwargs['token'] is None:
-            raise ConfigError('The Notion token is not set nor saved.')
+            raise ConfigException('The Notion token is not set nor saved.')
 
     if 'database_id' in kwargs:
         kwargs['database_id'] = fallback(kwargs['database_id'], config.get('database_id', None))  # noqa: E501
         if kwargs['database_id'] is None:
-            raise ConfigError('The database_id is not set nor saved.')
+            raise ConfigException('The database_id is not set nor saved.')
 
     if 'bib_file_path' in kwargs:
         kwargs['bib_file_path'] = fallback(kwargs['bib_file_path'], config.get('bib_file_path', None))  # noqa: E501
@@ -152,29 +152,27 @@ def main() -> int:
 
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
-        sys.exit(1)
+        return 1
 
     kwargs = vars(arguments)
     mode = kwargs.pop('mode', None)
 
     if mode == 'run':
         kwargs = sanitize_arguments(**kwargs)
-        run(**kwargs)
+        return run(**kwargs)
 
     elif mode == 'download':
         kwargs = sanitize_arguments(**kwargs)
-        download(**kwargs)
+        return download(**kwargs)
 
-    elif mode == 'set':
-        setup(**kwargs)
+    elif mode == 'set-config':
+        return setup(**kwargs)
 
     elif mode == 'inspect-config':
-        inspect()
+        return inspect()
 
     elif mode == 'clear-config':
-        clear()
+        return clear()
 
     else:
-        raise NotImplementedError
-
-    return 0
+        raise NotImplementedError('Invalid mode selection.')
