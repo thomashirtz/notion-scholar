@@ -136,7 +136,7 @@ usage: Use "notion-scholar --help" or "ns --help" for more information
 notion-scholar
 
 positional arguments:
-  {run,set-config,inspect-config,clear-config}
+  {run,download,set-config,inspect-config,clear-config}
                         Selection of the action
     run                 Run notion-scholar.
     set-config          Save the default values of notion-scholar.
@@ -147,12 +147,12 @@ optional arguments:
   -h, --help            show this help message and exit
 ```
 
-Four main mode exists: `run`, `set-config`, ` inspect-config` and `clear-config`. The help can be called this way:
+Five main modes exist: `run`, `download`, `set-config`, ` inspect-config` and `clear-config`. The help can be called this way:
 ```
 ns <mode> --help
 ```
 
-<details><summary>Details of the run, set-config, inspect-config and clear-config help:</summary>
+<details><summary>Help details:</summary>
 
 
 ```
