@@ -10,20 +10,7 @@ The main idea of this app is to allow to furnish a Notion database using a BibTe
 
 _Example of a database obtained using notion-scholar._
 
-### Requirements
-
-The properties necessary to import publications in the database are the following:
-* Title _(Name of the page)_
-* Authors _(Text)_
-* Year _(Number)_
-* Journal _(Text)_
-* Filename _(Text)_
-* URL _(URL)_
-* Abstract _(Text)_
-* Bibtex _(Text)_
-* Inbox _(Checkbox)_
-
-## Template
+### Template
 
 <details><summary>Dashboard template images</summary>
 
@@ -38,6 +25,19 @@ ____
 </details>
 
 [Link to the template](https://thomashirtz.notion.site/notion-scholar-a212906553b34a03bcb81c89837cedf6)
+
+### Requirements
+
+The properties necessary to import publications in a database are the following:
+* Title _(Name of the page)_
+* Authors _(Text)_
+* Year _(Number)_
+* Journal _(Text)_
+* Filename _(Text)_
+* URL _(URL)_
+* Abstract _(Text)_
+* Bibtex _(Text)_
+* Inbox _(Checkbox)_
 
 
 ## Installation
