@@ -186,17 +186,6 @@ optional arguments:
 ```
 </details>
 
-## Inspecting & clearing the configuration
-
-It is possible to see all the configurations saved by typing:
-```
-ns inspect-config
-```
-Moreover, it is possible to erase all the config saved (token, database_url, ...) by running:
-```
-ns clear-config
-```
-
 
 ## Tips
 ### Bibtex keys
