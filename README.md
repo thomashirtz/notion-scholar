@@ -4,13 +4,26 @@ Reference management solution using Python and Notion.
 
 The main idea of this app is to allow to furnish a Notion database using a BibTex formatted string or file. It also helps you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
 
-## Database
 
 ![publication-database](ressources/notion-scholar-0-database.png)
 
 _Example of a database obtained using notion-scholar._
 
-### Template
+## Installation
+
+
+```
+pip install git+https://github.com/thomashirtz/notion-scholar#egg=notion-scholar
+```
+You can now call the application using `notion-scholar` or `ns`
+
+## Setting up
+
+### 1. Creation of a notion database
+
+You can either duplicate the page template using the link below, or create a new database with the properties listed in requirements.
+
+**Template**
 
 <details><summary>Dashboard template images</summary>
 
@@ -26,7 +39,7 @@ ____
 
 [Link to the template](https://thomashirtz.notion.site/notion-scholar-a212906553b34a03bcb81c89837cedf6)
 
-### Requirements
+**Requirements**
 
 The properties necessary to import publications in a database are the following:
 * Title _(Name of the page)_
@@ -40,17 +53,7 @@ The properties necessary to import publications in a database are the following:
 * Inbox _(Checkbox)_
 
 
-## Installation
-
-
-```
-pip install git+https://github.com/thomashirtz/notion-scholar#egg=notion-scholar
-```
-You can now call the application using `notion-scholar` or `ns`
-
-## Setting up
-
-### 1. Creation of an integration
+### 2. Creation of an integration
 
 Create an [integration](https://www.notion.so/my-integrations) for the notion-scholar database. The integration needs to target the workplace containing the publication database.
 
@@ -62,13 +65,13 @@ Option needed:
 
 Copy the `Internal Integration Token` for the [step 3](#3-set-the-token-and-database_id-in-notion-scholar).
 
-### 2. Share the database with the Integration
+### 3. Share the database with the Integration
 
 Go to your database in notion => Click on `Share` => `Invite` => Select the integration that you just created.
 
 Copy the link of the database (simply the URL on a browser, on the application => Click on `...` => `Copy Link`) for the [step 3](#3-set-the-token-and-database_id-in-notion-scholar).
 
-### 3. Set the token and database_id in notion-scholar
+### 4. Set the token and database_id in notion-scholar
 For the first use, it is recommended to set up the configuration file. The main parameters to save are the token (which will be securely saved using the [keyring](https://pypi.org/project/keyring/) library) and the database-url.
 ```
 ns set-config --token <token> --database-id <database_id>
@@ -81,7 +84,7 @@ ns set-config -t <token> -db <database_id>
 The database_id is one part of the URL:
 `https://www.notion.so/<workspace_name>/<database_id>?v=<view_id>`
 
-### 4. Set the bib file path (not required, but recommended)
+### 5. Set the bib file path (not required, but recommended)
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
 ```
 ns set-config --bib-file-path <bib_file_path>
@@ -91,16 +94,6 @@ or
 ns set-config -f <bib_file_path>
 ```
 **The bib file needs to exist and the file path needs to be absolute.**
-## Inspecting & clearing the configuration
-
-It is possible to see all the configurations saved by typing:
-```
-ns inspect-config
-```
-Moreover, it is possible to erase all the config saved (token, database_url, ...) by running:
-```
-ns clear-config
-```
 
 ## How to use ?
 
@@ -193,6 +186,17 @@ optional arguments:
 ```
 </details>
 
+## Inspecting & clearing the configuration
+
+It is possible to see all the configurations saved by typing:
+```
+ns inspect-config
+```
+Moreover, it is possible to erase all the config saved (token, database_url, ...) by running:
+```
+ns clear-config
+```
+
 
 ## Tips
 ### Bibtex keys
@@ -230,16 +234,6 @@ For example:
 ### Copy equation properties
 
 It is possible to copy the equation in the table view. [Here](https://www.reddit.com/r/Notion/comments/erdtad/comment/ff4zefs/?utm_source=share&utm_medium=web2x&context=3) is a comment to explain how, it can be very useful.
-
-## To-do
-
-- [ ] Improve README.md
-- [ ] Add docstrings
-- [ ] Add possibility to upload files
-- [ ] Improve template
-- [ ] Create tests
-- [ ] Remove string option
-- [ ] Group arguments
 
 
 ## Feedbacks
