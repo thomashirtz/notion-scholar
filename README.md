@@ -17,6 +17,14 @@ pip install git+https://github.com/thomashirtz/notion-scholar#egg=notion-scholar
 ```
 You can now call the application using `notion-scholar` or `ns`
 
+<details><summary>Never used python nor github before ?</summary>
+
+1. Install Python 3.7 or above (tutorial available online)
+2. Install [pip](https://pip.pypa.io/en/stable/installation/) (Generally included with Python)
+3. Run the command `pip install ...` above using your machine command line (Maybe need to launch the command prompt as administrator on Windows)
+
+</details>
+
 ## Setting up
 
 ### 1. Creation of a notion database
