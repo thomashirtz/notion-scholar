@@ -71,13 +71,13 @@ Option needed:
 - [x] Update content
 - [x] Insert content
 
-Copy the `Internal Integration Token` for the [step 3](#3-set-the-token-and-database_id-in-notion-scholar).
+Copy the `Internal Integration Token` for the [step 4](#4-set-the-token-and-database_id-in-notion-scholar).
 
 ### 3. Share the database with the Integration
 
 Go to your database in notion => Click on `Share` => `Invite` => Select the integration that you just created.
 
-Copy the link of the database (simply the URL on a browser, on the application => Click on `...` => `Copy Link`) for the [step 3](#3-set-the-token-and-database_id-in-notion-scholar).
+Copy the link of the database (simply the URL on a browser, on the application => Click on `...` => `Copy Link`) for the [step 4](#4-set-the-token-and-database_id-in-notion-scholar).
 
 ### 4. Set the token and database_id in notion-scholar
 For the first use, it is recommended to set up the configuration file. The main parameters to save are the token (which will be securely saved using the [keyring](https://pypi.org/project/keyring/) library) and the database-url.
@@ -107,7 +107,7 @@ ns set-config -f <bib_file_path>
 
 There is three main way to use this application:
 
-1. [Setting up](#bib-file-path) the `bib-file-path` and call the `run` mode (It will automatically upload the new publications from the bib file into the database):
+1. [Setting up](#5-set-the-bib-file-path-not-required-but-recommended) the `bib-file-path` and call the `run` mode (It will automatically upload the new publications from the bib file into the database):
 ```
 ns run
 ```
