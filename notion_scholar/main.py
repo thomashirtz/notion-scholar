@@ -63,6 +63,39 @@ def get_parser():
         help='Bibtex entries to add (must be in-between three quotes \"\"\"<bib-string>\"\"\"). By default, the entries will be saved to the bib file from the config. It is possible to disable this behavior by changing the "save" option: "ns setup -save false".',  # noqa: E501
     )
 
+    # Download bibtex parser
+    download_parser = subparsers.add_parser(
+        'download', parents=[parent_parser],
+        help='Download the bibtex entries present in the database.',
+    )
+    download_parser.add_argument(
+        '-f', '--file-path',
+        default=None, type=str, metavar='', required=True,
+        help='File in which the bibtex entries will be saved',
+    )
+    download_parser.add_argument(  # todo group w/ run function
+        '-t', '--token',
+        default=None, type=str, metavar='', required=token is None,
+        help=f'Token used to connect to Notion. \n(default: {token})',
+    )
+    download_parser.add_argument(  # todo group w/ run function
+        '-db', '--database-id',
+        default=None, type=str, metavar='',
+        help=f'Database that will be furnished. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})',  # noqa: E501
+    )
+
+    # Clear config parser
+    clear_parser = subparsers.add_parser(  # noqa: F841
+        'clear-config', parents=[parent_parser],
+        help='Clear the notion-scholar config.',
+    )
+
+    # Inspect config parser
+    inspect_parser = subparsers.add_parser(  # noqa: F841
+        'inspect-config', parents=[parent_parser],
+        help='Inspect the notion-scholar config.',
+    )
+
     # Setup parser
     setup_parser = subparsers.add_parser(
         'set-config', parents=[parent_parser],
@@ -89,38 +122,6 @@ def get_parser():
         help=f'Save the database-id in the user config using the library "platformdirs". The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(current: {config.get("database_id", None)})',  # noqa: E501
     )
 
-    # Inspect config parser
-    inspect_parser = subparsers.add_parser(  # noqa: F841
-        'inspect-config', parents=[parent_parser],
-        help='Inspect the notion-scholar config.',
-    )
-
-    # Clear config parser
-    clear_parser = subparsers.add_parser(  # noqa: F841
-        'clear-config', parents=[parent_parser],
-        help='Clear the notion-scholar config.',
-    )
-
-    # Download bibtex parser
-    download_parser = subparsers.add_parser(
-        'download', parents=[parent_parser],
-        help='Download the bibtex entries present in the database.',
-    )
-    download_parser.add_argument(
-        '-f', '--file-path',
-        default=None, type=str, metavar='', required=True,
-        help='File in which the bibtex entries will be saved',
-    )
-    download_parser.add_argument(  # todo group w/ run function
-        '-t', '--token',
-        default=None, type=str, metavar='', required=token is None,
-        help=f'Token used to connect to Notion. \n(default: {token})',
-    )
-    download_parser.add_argument(  # todo group w/ run function
-        '-db', '--database-id',
-        default=None, type=str, metavar='',
-        help=f'Database that will be furnished. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})',  # noqa: E501
-    )
     return parser
 
 

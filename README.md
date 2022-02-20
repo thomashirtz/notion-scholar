@@ -135,12 +135,13 @@ usage: Use "notion-scholar --help" or "ns --help" for more information
 notion-scholar
 
 positional arguments:
-  {run,download,set-config,inspect-config,clear-config}
+  {run,download,clear-config,inspect-config,set-config}
                         Selection of the action
     run                 Run notion-scholar.
-    set-config          Save the default values of notion-scholar.
-    inspect-config      Inspect the notion-scholar config.
+    download            Download the bibtex entries present in the database.
     clear-config        Clear the notion-scholar config.
+    inspect-config      Inspect the notion-scholar config.
+    set-config          Save the default values of notion-scholar.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -151,7 +152,7 @@ Five main modes exist: `run`, `download`, `set-config`, ` inspect-config` and `c
 ns <mode> --help
 ```
 
-<details><summary>Help details:</summary>
+<details><summary>Example:</summary>
 
 
 ```
