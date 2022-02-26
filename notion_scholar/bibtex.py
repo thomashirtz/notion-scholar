@@ -58,10 +58,10 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
                 key=entry.get('ID', ''),
                 title=entry.get('title', ''),
                 authors=entry.get('author', '').replace('\n', ' '),
-                year=int(entry.get('year', '')),
+                year=int(entry['year']) if 'year' in entry.keys() else None,
                 journal=entry.get('journal', ''),
                 url=entry.get('url', ''),
-                abstract=entry.get('abstract', ' '),
+                abstract=entry.get('abstract', ''),
                 bibtex=bibtex_str,
             ),
         )
