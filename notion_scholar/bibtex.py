@@ -61,7 +61,7 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
                 year=int(entry.get('year', '')),
                 journal=entry.get('journal', ''),
                 url=entry.get('url', ''),
-                abstract=entry.get('abstract', ''),
+                abstract=entry.get('abstract', ' '),
                 bibtex=bibtex_str,
             ),
         )
