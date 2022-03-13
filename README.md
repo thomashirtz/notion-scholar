@@ -53,6 +53,8 @@ The properties necessary to import publications in a database are the following:
 * Filename _(Text)_
 * URL _(URL)_
 * Abstract _(Text)_
+* DOI _(Text)_
+* Type _(Select)_
 * Bibtex _(Text)_
 * Inbox _(Checkbox)_
 
