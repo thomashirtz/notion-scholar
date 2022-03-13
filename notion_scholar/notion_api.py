@@ -29,12 +29,18 @@ class Property:
     def checkbox(value: bool) -> dict:
         return {'checkbox': value}
 
+    @staticmethod
+    def select(value: str) -> dict:
+        return {"select": {"name": value}}
+
 
 def add_publications_to_database(
         publications: List[Publication],
         token: str,
         database_id: str,
 ) -> None:
+    # todo retrieve the list of all the property and filter
+    # todo update_database_with_publications check the empty fields and fill them
     client = Client(auth=token)
     for i, publication in enumerate(publications, start=1):
         print(f'{i}/{len(publications)}: {publication}')
@@ -50,6 +56,8 @@ def add_publications_to_database(
                 'Year': Property.number(publication.year),
                 'URL': Property.url(publication.url),
                 'Inbox': Property.checkbox(True),
+                'Type': Property.select(publication.type),
+                'DOI': Property.rich_text(publication.doi),
             },
         )
 

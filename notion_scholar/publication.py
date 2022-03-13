@@ -11,6 +11,8 @@ class Publication(NamedTuple):
     url: str
     bibtex: str
     abstract: str
+    doi: str
+    type: str
 
     def __str__(self):  # noqa TYP004
         return f'Publication(key="{self.key}", title="{self.title}")'
