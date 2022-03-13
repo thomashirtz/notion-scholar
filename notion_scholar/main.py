@@ -1,5 +1,6 @@
 import sys
 import argparse
+from pathlib import Path, PurePath
 from distutils.util import strtobool
 
 from notion_scholar.run import run
@@ -139,7 +140,10 @@ def sanitize_arguments(**kwargs):
             raise ConfigException('The database_id is not set nor saved.')
 
     if 'bib_file_path' in kwargs:
-        kwargs['bib_file_path'] = fallback(kwargs['bib_file_path'], config.get('bib_file_path', None))  # noqa: E501
+        if kwargs['bib_file_path'] is not None and not Path(kwargs['bib_file_path']).is_absolute():
+            kwargs['bib_file_path'] = str(Path.cwd().joinpath(kwargs['bib_file_path']))
+        else:
+            kwargs['bib_file_path'] = fallback(kwargs['bib_file_path'], config.get('bib_file_path', None))
 
     if 'save_to_bib_file' in kwargs:
         kwargs['save_to_bib_file'] = fallback(kwargs['save_to_bib_file'], config.get('save_to_bib_file', 'True'))  # noqa: E501
@@ -167,6 +171,9 @@ def main() -> int:
         return download(**kwargs)
 
     elif mode == 'set-config':
+        if kwargs['bib_file_path'] is not None and not Path(kwargs['bib_file_path']).is_absolute():
+            kwargs['bib_file_path'] = str(Path.cwd().joinpath(kwargs['bib_file_path']))
+            print(f'The path was relative, path used: {kwargs["bib_file_path"]}')
         return setup(**kwargs)
 
     elif mode == 'inspect-config':
