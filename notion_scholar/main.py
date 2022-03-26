@@ -30,7 +30,7 @@ def get_parser():
 
     # Choice of the subparser
     subparsers = parser.add_subparsers(
-        help='Selection of the action', dest='mode',
+        help='Selection of the action to perform.', dest='mode',
     )
 
     # Run parser
@@ -67,22 +67,22 @@ def get_parser():
     # Download bibtex parser
     download_parser = subparsers.add_parser(
         'download', parents=[parent_parser],
-        help='Download the bibtex entries present in the database.',
+        help='Download the bibtex entries present in the notion database.',
     )
     download_parser.add_argument(
         '-f', '--file-path',
         default=None, type=str, metavar='', required=True,
         help='File in which the bibtex entries will be saved',
     )
-    download_parser.add_argument(  # todo group w/ run function
+    download_parser.add_argument(
         '-t', '--token',
         default=None, type=str, metavar='', required=token is None,
         help=f'Token used to connect to Notion. \n(default: {token})',
     )
-    download_parser.add_argument(  # todo group w/ run function
+    download_parser.add_argument(
         '-db', '--database-id',
         default=None, type=str, metavar='',
-        help=f'Database that will be furnished. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})',  # noqa: E501
+        help=f'Database that will be downloaded. The database_id can be found in the url of the database: \nhttps://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n(default: {config.get("database_id", None)})',  # noqa: E501
     )
 
     # Clear config parser
@@ -127,6 +127,7 @@ def get_parser():
 
 
 def sanitize_arguments(**kwargs):
+    """Function to sanitize the arguments before passing them to the various functions."""
     config = get_config()
 
     if 'token' in kwargs:
@@ -171,7 +172,7 @@ def main() -> int:
         return download(**kwargs)
 
     elif mode == 'set-config':
-        if kwargs['bib_file_path'] is not None and not Path(kwargs['bib_file_path']).is_absolute():
+        if kwargs['bib_file_path'] is not None and not Path(kwargs['bib_file_path']).is_absolute():  # todo check why it is not possible to sanitize
             kwargs['bib_file_path'] = str(Path.cwd().joinpath(kwargs['bib_file_path']))
             print(f'The path was relative, path used: {kwargs["bib_file_path"]}')
         return setup(**kwargs)
