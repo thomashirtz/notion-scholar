@@ -73,7 +73,7 @@ Copy the `Internal Integration Token` for the [step 4](#4-set-the-token-and-data
 
 ### 3. Share the database with the Integration
 
-Go to your database in notion => Click on `Share` => `Invite` => Select the integration that you just created.
+Go to your database in notion => Click on `...` (top right) => `+ Add connections` => Select the integration that you just created.
 
 Copy the link of the database (simply the URL on a browser, on the application => Click on `...` => `Copy Link`) for the [step 4](#4-set-the-token-and-database_id-in-notion-scholar).
 
