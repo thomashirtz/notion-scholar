@@ -18,8 +18,11 @@ def get_bib_database_from_file(file_path: str) -> BibDatabase:
         BibDatabase object that contains the instances present in the
         file.
     """
-    with open(file_path) as bibtex_file:
-        parser = BibTexParser(common_strings=True)
+    with open(file_path, encoding='utf-8') as bibtex_file:
+        parser = BibTexParser(
+            common_strings=True,
+            ignore_nonstandard_types=False,
+        )
         return load(bibtex_file, parser=parser)
 
 
@@ -34,7 +37,9 @@ def get_bib_database_from_string(string: str) -> BibDatabase:
         string.
     """
     bibtex_parser = BibTexParser(
-        interpolate_strings=False, common_strings=True,
+        interpolate_strings=False,
+        common_strings=True,
+        ignore_nonstandard_types=False,
     )
     return bibtex_parser.parse(string)
 
