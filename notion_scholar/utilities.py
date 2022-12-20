@@ -37,7 +37,8 @@ def fallback(choice_1, choice_2):
     return choice_1 if choice_1 is not None else choice_2
 
 
-def get_token() -> Optional[str]: # todo put in utilities
+def get_token() -> Optional[str]:
+    """Retrieve the Notion API token stored with keyring."""
     return keyring.get_password('notion-scholar', 'token')
 
 
