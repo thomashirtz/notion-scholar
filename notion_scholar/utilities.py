@@ -43,6 +43,15 @@ def get_token() -> Optional[str]:
 
 
 def coerce_to_absolute_path(path: str, warn: bool = False) -> str:
+    """Coerce the input path to an absolute path.
+
+    Args:
+        path: Path needed to be coerced.
+        warn: Boolean indicating whether to warn the user if the path is coerced.
+
+    Returns:
+
+    """
     p = Path(path)
     if not p.is_absolute():
         if warn:
