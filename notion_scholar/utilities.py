@@ -32,13 +32,12 @@ def write_to_file(file_path: str, content: str) -> None:
         f.write(content)
 
 
-def fallback(choice_1, choice_2):
-    """Fallback function to use choice_2 if choice_1 is None"""
-    return choice_1 if choice_1 is not None else choice_2
+def get_token() -> Optional[str]: # Add returns
+    """Retrieve the Notion API token stored with keyring.
 
-
-def get_token() -> Optional[str]:
-    """Retrieve the Notion API token stored with keyring."""
+    Returns:
+        A string containing the token or `None` if the token does not exist.
+    """
     return keyring.get_password('notion-scholar', 'token')
 
 
