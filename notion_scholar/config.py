@@ -16,6 +16,7 @@ class ConfigException(NotionScholarException):
 
 
 class ConfigManager:
+    """Class that manages all the notion-scholar configuration."""
     def __init__(
             self,
             token: Optional[str] = None,
@@ -136,7 +137,7 @@ class ConfigManager:
             print(f'{key}: {value}')
 
     def get(self) -> Dict[str, str]:
-        if not self.config_path.is_file():
+        if not self.config_path.is_file(): # todo check if is a file and exist + right section
             return {}
         else:
             config = ConfigParser()
