@@ -58,6 +58,7 @@ The properties necessary to import publications in a database are the following:
 * Bibtex _(Text)_
 * Inbox _(Checkbox)_
 
+**No space should be in the names of the properties.**
 
 ### 2. Creation of an integration
 
