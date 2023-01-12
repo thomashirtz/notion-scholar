@@ -120,7 +120,7 @@ class ConfigManager:
         }
 
         for key, value in key_to_value.items():
-            if key is not None:
+            if value is not None:
                 config.set(section='Settings', option=key, value=value)
 
         # Save the changes
