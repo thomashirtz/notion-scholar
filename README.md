@@ -78,6 +78,8 @@ Go to your database in notion => Click on `...` (top right) => `+ Add connection
 
 Copy the link of the database (simply the URL on a browser, on the application => Click on `...` => `Copy Link`) for the [step 4](#4-set-the-token-and-database_id-in-notion-scholar).
 
+It is the *database page* and not the dashboard page that needs to be integrated. Moreover, it is also the URL of the database page that needs to be set into `notion-scholar`.  
+
 ### 4. Set the token and database_id in notion-scholar
 For the first use, it is recommended to set up the configuration file. The main parameters to save are the token (which will be securely saved using the [keyring](https://pypi.org/project/keyring/) library) and the database-url.
 ```
@@ -90,6 +92,7 @@ ns set-config -t <token> -db <database_id>
 
 The database_id is one part of the URL:
 `https://www.notion.so/<workspace_name>/<database_id>?v=<view_id>`
+
 
 ### 5. Set the bib file path (not required, but recommended)
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
