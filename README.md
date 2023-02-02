@@ -1,4 +1,7 @@
-# notion-scholar
+<p align="center">
+    <img src="ressources/notion-scholar-logo.png" height="100">
+    <h1 align="center">notion-scholar</h1>
+</p>
 
 Reference management solution using Python and Notion.
 
