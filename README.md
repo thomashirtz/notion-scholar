@@ -93,6 +93,8 @@ ns set-config -t <token> -db <database_id>
 The database_id is one part of the URL:
 `https://www.notion.so/<workspace_name>/<database_id>?v=<view_id>`
 
+For example, if the database url is : `https://www.notion.so/thomashirtz/be31bb3f190f46c69e804785cc83c7ce?v=5674957e71e24aeb91d6db65f7978f0c` the command that needs to be used to set the database is `ns set-config -db be31bb3f190f46c69e804785cc83c7ce`
+
 
 ### 5. Set the bib file path (not required, but recommended)
 If you want to set the default bib path that will be used when the `ns` run is called, you can set it by typing:
