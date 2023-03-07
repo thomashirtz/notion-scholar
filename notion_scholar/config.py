@@ -145,6 +145,11 @@ class ConfigManager:
             try:
                 return dict(config['Settings'])
             except KeyError:
+                warnings.warn(
+                    'The notion scholar seems to have the old config structure. '
+                    'A function will be executed in order to update the config. '
+                    'If some problems arise in the future, please run `ns clear-config`'
+                )
                 return self._update_config()
 
     def clear(self) -> None:
