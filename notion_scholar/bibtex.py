@@ -1,4 +1,3 @@
-import warnings
 from typing import List
 
 from bibtexparser import dumps
@@ -49,18 +48,12 @@ def get_bibtex_str(entry: dict) -> str:
     """"""
     copied_entry = dict(entry)
     database = BibDatabase()
-    database.entries = [copied_entry]
-
     bibtex_str = dumps(database)
+
     if len(bibtex_str) > 2000:
         copied_entry.pop('abstract', None)
-        warnings.warn(
-            f'{entry["ID"]} has its bibtex dump too long ({len(bibtex_str)} > 2000). '
-            f'Because of API limitation of 2000 characters, the abstract tag has '
-            f'therefore been removed.',
-            stacklevel=0,
-        )
 
+    database.entries = [copied_entry]
     return dumps(database)
 
 
@@ -75,17 +68,6 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
     """
     publications = []
     for entry in bib_database.entries:
-
-        abstract = entry.get('abstract', '')
-        if len(abstract) > 2000:
-            warnings.warn(
-                f'{entry["ID"]} has its abstract too long ({len(abstract)} > 2000). '
-                f'Because of the 2000 characters API limitation, the abstract has '
-                f'therefore been truncated at the 2000th character.',
-                stacklevel=0,
-            )
-            abstract = abstract[:2000]
-
         publications.append(
             Publication(
                 key=entry.get('ID', ''),
@@ -94,7 +76,7 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
                 year=int(entry['year']) if 'year' in entry.keys() else None,
                 journal=entry.get('journal', ''),
                 url=entry.get('url', ''),
-                abstract=abstract,
+                abstract=entry.get('abstract', ''),
                 doi=entry.get('doi', ''),
                 type=entry.get('ENTRYTYPE', '').lower(),
                 bibtex=get_bibtex_str(entry),

@@ -1,3 +1,4 @@
+import warnings
 from typing import Any
 from typing import Callable
 from typing import List
@@ -44,11 +45,22 @@ def add_publications_to_database(
     client = Client(auth=token)
     for i, publication in enumerate(publications, start=1):
         print(f'{i}/{len(publications)}: {publication}')
+
+        abstract = publication.abstract
+        if len(abstract) > 2000:
+            warnings.warn(
+                f'{publication.key} has its abstract too long ({len(abstract)} > 2000). '
+                f'Because of the 2000 characters API limitation, the abstract has '
+                f'therefore been truncated at the 2000th character.',
+                stacklevel=0,
+            )
+            abstract = abstract[:2000]
+
         client.pages.create(
             parent={'database_id': database_id},
             properties={
                 'Title': Property.title(publication.title),
-                'Abstract': Property.rich_text(publication.abstract),
+                'Abstract': Property.rich_text(abstract),
                 'Bibtex': Property.rich_text(publication.bibtex),
                 'Filename': Property.rich_text(publication.key),
                 'Journal': Property.rich_text(publication.journal),
