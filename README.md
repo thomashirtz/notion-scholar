@@ -46,17 +46,20 @@ ____
 **Requirements**
 
 The properties necessary to import publications in a database are the following:
-* Title _(Name of the page)_
-* Authors _(Text)_
-* Year _(Number)_
-* Journal _(Text)_
-* Filename _(Text)_
-* URL _(URL)_
-* Abstract _(Text)_
-* DOI _(Text)_
-* Type _(Select)_
-* Bibtex _(Text)_
-* Inbox _(Checkbox)_
+
+| Property Name      | Property Type |
+| ------------------ | ------------- |
+| Title              | Title         |
+| Authors            | Text          |
+| Year               | Number        |
+| Journal            | Text          |
+| Filename           | Text          |
+| URL                | URL           |
+| Abstract           | Text          |
+| DOI                | Text          |
+| Type               | Select        |
+| Bibtex             | Text          |
+| Inbox              | Checkbox      |
 
 **No space should be in the names of the properties.**
 
