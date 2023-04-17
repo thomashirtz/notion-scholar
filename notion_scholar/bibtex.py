@@ -46,15 +46,17 @@ def get_bib_database_from_string(string: str) -> BibDatabase:
 
 def get_bibtex_str(entry: dict) -> str:
     """"""
-    copied_entry = dict(entry)
     database = BibDatabase()
+    database.entries = [dict(entry)]
     bibtex_str = dumps(database)
 
+    copied_entry = dict(entry)
     if len(bibtex_str) > 2000:
         copied_entry.pop('abstract', None)
 
     database.entries = [copied_entry]
-    return dumps(database)
+    bibtex_str = dumps(database)
+    return bibtex_str if len(bibtex_str) > 2000 else ''
 
 
 def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
