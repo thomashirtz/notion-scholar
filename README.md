@@ -41,7 +41,7 @@ ____
 
 </details>
 
-[Link to the template](https://thomashirtz.notion.site/Bibliography-68cfc13ff00f423787470214fd1d688f)
+[Link to the template](https://thomashirtz.notion.site/Bibliography-408958535d9140ec9ee557eb044bb97a)
 
 **Requirements**
 
