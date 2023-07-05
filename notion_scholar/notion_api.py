@@ -3,6 +3,7 @@ from typing import Any
 from typing import Callable
 from typing import List
 from typing import Union
+from typing import Optional
 
 from notion_client import Client
 
@@ -33,12 +34,17 @@ class Property:
     @staticmethod
     def select(value: str) -> dict:
         return {"select": {"name": value}}
+    
+    @staticmethod
+    def relation(value: List[str]) -> dict:
+        return {"relation": [{"id": v} for v in value]}
 
 
 def add_publications_to_database(
         publications: List[Publication],
         token: str,
         database_id: str,
+        categories: Optional[List[str]] = None,
 ) -> None:
     # todo retrieve the list of all the property and filter
     # todo update_database_with_publications check the empty fields and fill them
@@ -70,6 +76,7 @@ def add_publications_to_database(
                 'Inbox': Property.checkbox(True),
                 'Type': Property.select(publication.type),
                 'DOI': Property.rich_text(publication.doi),
+                **({'Categories': Property.relation(categories)} if categories else {}),
             },
         )
 

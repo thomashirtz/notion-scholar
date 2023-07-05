@@ -23,11 +23,13 @@ class ConfigManager:
             string: Optional[str] = None,
             file_path: Optional[str] = None,
             database_id: Optional[str] = None,
+            categories: Optional[str] = None,
     ):
         self.token = token
         self.string = string
         self.file_path = file_path
         self.database_id = database_id
+        self.categories = categories
 
         directory_path = Path(user_config_dir(appname='notion-scholar'))
         self.config_path = directory_path.joinpath('config').with_suffix('.ini')
@@ -57,7 +59,8 @@ class ConfigManager:
         return {
             'bib_string': self.string,
             'bib_file_path': file_path,
-            **self._get_sanitized_kwargs()
+            **self._get_sanitized_kwargs(),
+            'categories': self.categories,
         }
 
     def _get_sanitized_kwargs(self):

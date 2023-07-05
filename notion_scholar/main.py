@@ -43,6 +43,14 @@ def get_parser():
              f'https://www.notion.so/{{workspace_name}}/{{database_id}}?v={{view_id}} \n'
              f'(default: {config.get("database_id", None)})',
     )
+    run_parser.add_argument(
+        '-c', '--category',
+        action='append', default=None, type=str, required=False,
+        dest='categories',
+        help='Category of the publications that will be added to the database (provide the category ID). '
+                'It is possible to add multiple categories by passing this argument multiple times. '
+                '(default: no category)'
+    )
 
     if config.get('file_path', None) is None:
         group = run_parser.add_mutually_exclusive_group(required=True)

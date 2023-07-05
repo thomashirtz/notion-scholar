@@ -21,6 +21,7 @@ def run(
         database_id: str,
         bib_file_path: Optional[str] = None,
         bib_string: Optional[str] = None,
+        categories: Optional[List[str]] = None,
 ) -> int:
     if bib_string is not None:
         bib_database: BibDatabase = get_bib_database_from_string(string=bib_string)
@@ -42,6 +43,7 @@ def run(
         publications=publication_list_filtered,
         token=token,
         database_id=database_id,
+        categories=categories,
     )
 
     if not publication_list_filtered and publication_list:
