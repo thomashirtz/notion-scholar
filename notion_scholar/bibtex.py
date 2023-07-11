@@ -37,7 +37,7 @@ def get_bib_database_from_string(string: str) -> BibDatabase:
         string.
     """
     bibtex_parser = BibTexParser(
-        # interpolate_strings=False,
+        interpolate_strings=False,
         common_strings=True,
         ignore_nonstandard_types=False,
     )
