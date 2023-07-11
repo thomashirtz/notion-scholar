@@ -19,7 +19,7 @@ class IllegalArgumentException(NotionScholarException):
 def run(
         token: str,
         database_id: str,
-        bib_file_path: Optional[str],
+        bib_file_path: Optional[str] = None,
         bib_string: Optional[str] = None,
 ) -> int:
     if bib_string is not None:

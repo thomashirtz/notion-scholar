@@ -47,12 +47,12 @@ class ConfigManager:
 
             if not Path(file_path).exists():
                 raise ConfigException("The file_path provided to the argparse does not exist.")
-        else:
+        elif self.string is None:
             file_path = config.get('file_path', None)
             if file_path is None:
-                raise ConfigException("No file_path provided and no file path set in the config.")
+                raise ConfigException("No file_path or bib string provided and no file path set in the config.")
             if not Path(file_path).exists():
-                raise ConfigException("No file_path provided and the file_path set in the config does not exist.")
+                raise ConfigException("No file_path or bib string provided and the file_path set in the config does not exist.")
 
         return {
             'bib_string': self.string,
