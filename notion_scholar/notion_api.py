@@ -55,18 +55,36 @@ def add_publications_to_database(
                 stacklevel=0,
             )
             abstract = abstract[:2000]
-
+        authors = publication.authors
+        if len(authors) > 2000:
+            warnings.warn(
+                f'{publication.key} has its abstract too long ({len(authors)} > 2000). '
+                f'Because of the 2000 characters API limitation, the author list has '
+                f'therefore been truncated at the 2000th character.',
+                stacklevel=0,
+            )
+            authors = authors[:2000]
+        bibtex = publication.bibtex
+        if len(bibtex) > 2000:
+            warnings.warn(
+                f'{publication.key} has its abstract too long ({len(bibtex)} > 2000). '
+                f'Because of the 2000 characters API limitation, the author list has '
+                f'therefore been truncated at the 2000th character.',
+                stacklevel=0,
+            )
+            bibtex = bibtex[:2000]
         client.pages.create(
             parent={'database_id': database_id},
             properties={
                 'Title': Property.title(publication.title),
                 'Abstract': Property.rich_text(abstract),
-                'Bibtex': Property.rich_text(publication.bibtex),
+                'Bibtex': Property.rich_text(bibtex),
                 'Filename': Property.rich_text(publication.key),
                 'Journal': Property.rich_text(publication.journal),
-                'Authors': Property.rich_text(publication.authors),
+                'Authors': Property.rich_text(authors),
                 'Year': Property.number(publication.year),
                 'URL': Property.url(publication.url),
+                'Category': Property.relation(publication.keywords),
                 'Inbox': Property.checkbox(True),
                 'Type': Property.select(publication.type),
                 'DOI': Property.rich_text(publication.doi),
