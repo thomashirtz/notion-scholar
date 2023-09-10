@@ -58,7 +58,7 @@ def add_publications_to_database(
         authors = publication.authors
         if len(authors) > 2000:
             warnings.warn(
-                f'{publication.key} has its abstract too long ({len(authors)} > 2000). '
+                f'{publication.key} has its author list too long ({len(authors)} > 2000). '
                 f'Because of the 2000 characters API limitation, the author list has '
                 f'therefore been truncated at the 2000th character.',
                 stacklevel=0,
@@ -67,8 +67,8 @@ def add_publications_to_database(
         bibtex = publication.bibtex
         if len(bibtex) > 2000:
             warnings.warn(
-                f'{publication.key} has its abstract too long ({len(bibtex)} > 2000). '
-                f'Because of the 2000 characters API limitation, the author list has '
+                f'{publication.key} has its Bibtex too long ({len(bibtex)} > 2000). '
+                f'Because of the 2000 characters API limitation, the Bibtex has '
                 f'therefore been truncated at the 2000th character.',
                 stacklevel=0,
             )
