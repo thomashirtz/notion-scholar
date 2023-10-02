@@ -84,7 +84,7 @@ def add_publications_to_database(
                 'Authors': Property.rich_text(authors),
                 'Year': Property.number(publication.year),
                 'URL': Property.url(publication.url),
-                'Category': Property.select(publication.keywords),
+                'Category': Property.relation(publication.keywords),
                 'Inbox': Property.checkbox(True),
                 'Type': Property.select(publication.type),
                 'DOI': Property.rich_text(publication.doi),
