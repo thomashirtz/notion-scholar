@@ -82,6 +82,7 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
                 doi=entry.get('doi', ''),
                 type=entry.get('ENTRYTYPE', '').lower(),
                 bibtex=get_bibtex_str(entry),
+                keywords=entry.get('keywords',''),
             ),
         )
     return publications
