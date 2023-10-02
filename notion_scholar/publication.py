@@ -13,6 +13,7 @@ class Publication(NamedTuple):
     abstract: str
     doi: str
     type: str
+    keywords: str
 
     def __str__(self):  # noqa TYP004
         return f'Publication(key="{self.key}", title="{self.title}")'
