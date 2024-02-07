@@ -33,7 +33,7 @@ def get_parser():
     )
     run_parser.add_argument(
         '-t', '--token',
-        default=None, type=str, metavar='', required=token is None,
+        default=None, type=str, metavar='',
         help=f'Token used to connect to Notion. \n(default: {token})',
     )
     run_parser.add_argument(
@@ -75,7 +75,7 @@ def get_parser():
     )
     download_parser.add_argument(
         '-t', '--token',
-        default=None, type=str, metavar='', required=token is None,
+        default=None, type=str, metavar='', required=False,
         help=f'Token used to connect to Notion. \n(default: {token})',
     )
     download_parser.add_argument(
@@ -135,9 +135,26 @@ def main() -> int:
         parser.print_help(sys.stderr)
         return 1
 
+    need_token_or_database_id = {
+        'run': True,
+        'download': True,
+        'set-config': False,
+        'clear-config': False,
+        'inspect-config': False,
+    }
+
     kwargs = vars(arguments)
     mode = kwargs.pop('mode', None)
     config_manager = ConfigManager(**kwargs)
+
+    if need_token_or_database_id[mode]:
+        token = get_token()
+        if token is None and 'token' in arguments and arguments.token is None:
+            parser.error("Error: The '--token' argument is required but not provided nor saved.")
+
+        config = config_manager.get()
+        if config.get('database_id', None) is None and 'database_id' in arguments and arguments.database_id is None:
+            parser.error("Error: The '--database-id' argument is required but not provided nor saved.")
 
     if mode == 'run':
         return run(**config_manager.get_run_kwargs())
