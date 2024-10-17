@@ -71,3 +71,4 @@ def check_missing_and_extra_pdfs(bibtex_path, folder_path):
 if __name__ == '__main__':
     bibtex_path = Path(r"/resources\sample.bib")
     folder_path = Path(r"/resources")
+    check_missing_and_extra_pdfs(bibtex_path, folder_path)
