@@ -5,7 +5,7 @@ Reference management solution using Python and Notion.
 The main idea of this app is to allow to furnish a Notion database using a BibTex formatted string or file. It also helps you to organize papers, create a bibliography and give you the opportunity to annotate the publications directly on their Notion's pages.
 
 
-![publication-database](ressources/notion-scholar-database.png)
+![publication-database](resources/notion-scholar-database.png)
 
 _Example of a database obtained using notion-scholar._
 
@@ -35,9 +35,9 @@ You can either duplicate the page template using the link below, or create a new
 
 <details><summary>Preview images</summary>
 
-![dashboard](ressources/notion-scholar-dashboard.png)
+![dashboard](resources/notion-scholar-dashboard.png)
 ____
-![category-page](ressources/notion-scholar-category-page.png)
+![category-page](resources/notion-scholar-category-page.png)
 
 </details>
 
